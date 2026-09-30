@@ -1054,7 +1054,9 @@ class Component extends DCLogic {
       if (u >= 1) { clearInterval(this.carIv); this.carIv = null; }
     }, 16);
   }
-  pace() { return this.props.pace ?? 1; }
+  // Screen-heights of scrolling per scene step. Phones scroll in short swipes, so the
+  // same choreography runs over ~40% less distance there.
+  pace() { return (this.props.pace ?? 1) * (window.innerWidth < 760 ? 0.6 : 1); }
   update() {
     this.armCar();
     const vh = window.innerHeight, vw = window.innerWidth;
