@@ -664,7 +664,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         </div>
         <div class="rm-p1-stills" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;opacity:{{ p1.e.op }};transform:{{ p1.e.tf }}">
           <div role="button" tabindex="0" sc-camel-on-click="{{ open3 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
-            <img src="assets/img/frog-invader-1.webp" alt="Frog Invader — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <img src="assets/img/frog-invader-1.webp" alt="Frog Invader sticker on a wet wall" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">01</span>
           </div><div role="button" tabindex="0" sc-camel-on-click="{{ open4 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
             <img src="assets/img/frog-invader-2.webp" alt="Frog Invader — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
@@ -883,7 +883,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     <div sc-camel-on-click="{{ closeLb }}" style="position:absolute;inset:0;z-index:50;background:rgba(5,5,5,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:5vh 5vw;box-sizing:border-box">
       <div style="width:{{ lbW }};display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#f4f2ec">
         <span>{{ lbTitle }}</span>
-        <button sc-camel-on-click="{{ closeLb }}" style="letter-spacing:.14em">CLOSE ✕</button>
+        <div style="display:flex;align-items:center;gap:20px;flex-shrink:0">
+          <sc-if value="{{ lbIsVimeo }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ lbVimeoUrl }}" target="_blank" rel="noopener" sc-camel-on-click="{{ stop }}" style="letter-spacing:.14em;color:#d6ff3c;white-space:nowrap">VIMEO ↗</a>
+          </sc-if>
+          <button sc-camel-on-click="{{ closeLb }}" style="letter-spacing:.14em;white-space:nowrap">CLOSE ✕</button>
+        </div>
       </div>
       <sc-if value="{{ lbIsVimeo }}" hint-placeholder-val="{{ false }}">
         <div sc-camel-on-click="{{ stop }}" style="position:relative;width:{{ lbW }};aspect-ratio:16 / 9;max-height:84vh;background:#000">
@@ -1307,6 +1312,8 @@ class Component extends DCLogic {
       lbSrc: this.state.lb ? (this.srcs[this.state.lb.i] || '') : '',
       lbIsVimeo: !!(this.state.lb && this.vimeo[this.state.lb.i]),
       lbIsLocal: !!(this.state.lb && !this.vimeo[this.state.lb.i]),
+      // Fallback when an embed is blocked (e.g. a sandboxed preview): open the film on vimeo.com
+      lbVimeoUrl: this.state.lb && this.vimeo[this.state.lb.i] ? `https://vimeo.com/${this.vimeo[this.state.lb.i]}` : '',
       lbEmbed: this.state.lb && this.vimeo[this.state.lb.i] ? `https://player.vimeo.com/video/${this.vimeo[this.state.lb.i]}?autoplay=1&title=0&byline=0&portrait=0&dnt=1#t=${Math.floor((this.seek[this.state.lb.i] || 0) * (this.vdur[this.state.lb.i] || 0))}s` : '',
       closeLb: () => this.closeLb(),
       stop: ev => ev.stopPropagation(),
