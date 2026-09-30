@@ -74,7 +74,7 @@
     <p>I create video content across the entire production process — from the idea and script to directing on set and delivering the final edit. Commercial, brand and music video production for brands and artists who want a story.</p>
     <h2 style="font-size:18px;margin-top:32px">Selected work</h2>
     <ul>
-      <li><a href="https://vimeo.com/999807641" style="color:#d6ff3c">Frog Invader — brand video</a></li>
+      <li><a href="https://vimeo.com/1231701201" style="color:#d6ff3c">Frog Invader — brand video</a></li>
       <li><a href="https://vimeo.com/1137592323" style="color:#d6ff3c">Prodbyrl — Racks On Racks (music video)</a></li>
       <li><a href="https://vimeo.com/1230662751" style="color:#d6ff3c">Noofficial — Night Parking (music video)</a></li>
       <li><a href="https://vimeo.com/1157992667" style="color:#d6ff3c">1nonly, Freddie Dredd — Grailed (fan music video, 9:16)</a></li>
@@ -729,7 +729,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
             <span style="background:#050505;padding:2px 6px">CAM_02</span>
             <span style="background:#050505;padding:2px 6px;color:#8a8a85">STILL</span>
           </div>
-          <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
+          <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">⤢ VIEW</span>
         </div>
         <div role="button" tabindex="0" sc-camel-on-click="{{ open8 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
           <img src="assets/img/racks-on-racks-2.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
@@ -738,7 +738,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
             <span style="background:#050505;padding:2px 6px">CAM_03</span>
             <span style="background:#050505;padding:2px 6px;color:#8a8a85">STILL</span>
           </div>
-          <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
+          <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">⤢ VIEW</span>
         </div>
         <div role="button" tabindex="0" sc-camel-on-click="{{ open9 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
           <img src="assets/img/racks-on-racks-3.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
@@ -747,7 +747,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
             <span style="background:#050505;padding:2px 6px">CAM_04</span>
             <span style="background:#050505;padding:2px 6px;color:#8a8a85">STILL</span>
           </div>
-          <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
+          <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">⤢ VIEW</span>
         </div>
       </div>
     </div>
@@ -901,6 +901,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <iframe sc-camel-src="{{ lbEmbed }}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
         </div>
       </sc-if>
+      <sc-if value="{{ lbIsImg }}" hint-placeholder-val="{{ false }}">
+        <img sc-camel-src="{{ lbImg }}" alt="{{ lbTitle }}" sc-camel-on-click="{{ stop }}" style="display:block;max-width:{{ lbW }};max-height:84vh;width:auto;height:auto;object-fit:contain;background:#000">
+      </sc-if>
       <sc-if value="{{ lbIsLocal }}" hint-placeholder-val="{{ false }}">
         <video ref="{{ lbRef }}" sc-camel-on-click="{{ stop }}" sc-camel-src="{{ lbSrc }}" controls="" playsinline="" style="width:{{ lbW }};aspect-ratio:{{ lbAR }};max-height:84vh;border-radius:{{ lbRad }};background:#000;object-fit:contain"></video>
       </sc-if>
@@ -932,7 +935,9 @@ class Component extends DCLogic {
   titles = ['SHOWREEL', 'NOOFFICIAL — NIGHT PARKING', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', '1NONLY, FREDDIE DREDD — GRAILED', 'FASHION STYLIST — SOCIAL MEDIA', 'ZMROK TATTOO STUDIO', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING'];
   refs = Array.from({ length: 17 }, () => React.createRef());
   srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), 12: ((window.__resources||{}).rd||'uploads/lite/rd.mp4'), 1: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 13: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 14: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 15: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 16: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.mp4') };
-  vimeo = { 10: '1157992667', 11: '1231687535', 12: '1231684880', 0: '1230337518', 2: '999807641', 3: '999807641', 4: '999807641', 5: '999807641', 6: '1137592323', 7: '1137592323', 8: '1137592323', 9: '1137592323', 1: '1230662751', 13: '1230662751', 14: '1230662751', 15: '1230662751', 16: '1230662751' };
+  vimeo = { 0: '1230337518', 1: '1230662751', 2: '1231701201', 6: '1137592323', 10: '1157992667', 11: '1231687535', 12: '1231684880' };
+  // Case-study stills open as enlarged images, not films
+  stills = { 3: 'assets/img/frog-invader-1.webp', 4: 'assets/img/frog-invader-2.webp', 5: 'assets/img/tile.webp', 7: 'assets/img/racks-on-racks-1.webp', 8: 'assets/img/racks-on-racks-2.webp', 9: 'assets/img/racks-on-racks-3.webp', 13: 'assets/img/night-parking-1.webp', 14: 'assets/img/night-parking-2.webp', 15: 'assets/img/night-parking-3.webp', 16: 'assets/img/night-parking-4.webp' };
   vdur = { 2: 35.04, 3: 35.04, 4: 35.04, 5: 35.04, 6: 37.17, 7: 37.17, 8: 37.17, 9: 37.17, 1: 149.25, 13: 149.25, 14: 149.25, 15: 149.25, 16: 149.25 };
   seek = [null, 0, 0, 0, 0, 0, 0, 0.4375, 0.5625, 0.8542, 0, 0, 0, 0.1042, 0.4792, 0.7292, 0.8542];
   ranges = [[-1, 3.1], [8.3, 11], [2.1, 5.9], null, null, null, [4.9, 8.6], null, null, null, [9.8, 14.2], [9.8, 14.2], [9.8, 14.2]];
@@ -1315,12 +1320,14 @@ class Component extends DCLogic {
       lbOpen: !!this.state.lb,
       lbTitle: this.state.lb ? this.titles[this.state.lb.i] : '',
       lbRef: this.lbRef,
-      lbW: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? 'min(100%, calc(84vh * 9 / 16))' : 'min(100%, calc(80vh * 16 / 9))',
+      lbIsImg: !!(this.state.lb && this.stills[this.state.lb.i]),
+      lbImg: this.state.lb ? (this.stills[this.state.lb.i] || '') : '',
+      lbW: this.state.lb && this.stills[this.state.lb.i] ? 'min(100%, calc(84vh * 16 / 9))' : this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? 'min(100%, calc(84vh * 9 / 16))' : 'min(100%, calc(80vh * 16 / 9))',
       lbAR: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? '9 / 16' : '16 / 9',
       lbRad: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? '18px' : '0px',
       lbSrc: this.state.lb ? (this.srcs[this.state.lb.i] || '') : '',
-      lbIsVimeo: !!(this.state.lb && this.vimeo[this.state.lb.i]),
-      lbIsLocal: !!(this.state.lb && !this.vimeo[this.state.lb.i]),
+      lbIsVimeo: !!(this.state.lb && !this.stills[this.state.lb.i] && this.vimeo[this.state.lb.i]),
+      lbIsLocal: !!(this.state.lb && !this.stills[this.state.lb.i] && !this.vimeo[this.state.lb.i]),
       // Fallback when an embed is blocked (e.g. a sandboxed preview): open the film on vimeo.com
       lbVimeoUrl: this.state.lb && this.vimeo[this.state.lb.i] ? `https://vimeo.com/${this.vimeo[this.state.lb.i]}` : '',
       lbEmbed: this.state.lb && this.vimeo[this.state.lb.i] ? `https://player.vimeo.com/video/${this.vimeo[this.state.lb.i]}?autoplay=1&title=0&byline=0&portrait=0&dnt=1#t=${Math.floor((this.seek[this.state.lb.i] || 0) * (this.vdur[this.state.lb.i] || 0))}s` : '',
