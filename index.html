@@ -539,6 +539,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @keyframes rm-marq-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 @keyframes rm-morph{0%{border-radius:50%;transform:rotate(0)}25%{border-radius:3px;transform:rotate(45deg)}50%{border-radius:50% 0;transform:rotate(90deg)}75%{border-radius:0 50%;transform:rotate(180deg)}100%{border-radius:50%;transform:rotate(360deg)}}
 
+[role="button"]:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #d6ff3c !important;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){
+  *{animation-play-state:paused !important}
+}
+
 /* ── Phones & narrow tablets: stack every two-column layout so each
    scene still fits one screen. !important overrides the inline styles. */
 @media (max-width: 760px) {
@@ -636,7 +641,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <!-- 01 FROG INVADER -->
   <div data-screen-label="01 Frog Invader" style="position:absolute;inset:0;background:#f4f4f1;color:#0f0f0f;visibility:{{ p1.vis }};transform:{{ p1.tf }};filter:{{ p1.fx }};transform-origin:50% 0%;overflow:hidden;font-family:'Manrope',sans-serif">
     <div class="rm-p1-grid" style="position:absolute;inset:0;box-sizing:border-box;padding:clamp(64px,10vh,100px) 2.4vw 2.4vw;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2vw">
-      <div sc-camel-on-click="{{ open2 }}" style="position:relative;min-height:0;border-radius:24px;overflow:hidden;background:#0f0f0f;cursor:pointer;clip-path:{{ p1.vclip }}">
+      <div role="button" tabindex="0" sc-camel-on-click="{{ open2 }}" style="position:relative;min-height:0;border-radius:24px;overflow:hidden;background:#0f0f0f;cursor:pointer;clip-path:{{ p1.vclip }}">
         <video ref="{{ v2 }}" src="{{ vid.frog }}" poster="assets/img/posters/frog.webp" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p1.vidTf }}"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.5))"></div>
         <div style="position:absolute;left:20px;right:20px;bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em">
@@ -656,13 +661,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <p class="rm-brief" style="margin:0;font-size:min(clamp(15px,1.2vw,20px),2.7vh);font-weight:500;line-height:1.42;letter-spacing:-0.01em;text-wrap:pretty">A brand video for Frog Invader, an Instagram sticker shop. At the time, they enjoyed huge local recognition across the city, with their stickers visible on almost every corner. The concept was designed to highlight that street presence while spotlighting the brand's vibrant identity.</p>
         </div>
         <div class="rm-p1-stills" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;opacity:{{ p1.e.op }};transform:{{ p1.e.tf }}">
-          <div sc-camel-on-click="{{ open3 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
+          <div role="button" tabindex="0" sc-camel-on-click="{{ open3 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
             <img src="assets/img/frog-invader-1.webp" alt="Frog Invader — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">01</span>
-          </div><div sc-camel-on-click="{{ open4 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
+          </div><div role="button" tabindex="0" sc-camel-on-click="{{ open4 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
             <img src="assets/img/frog-invader-2.webp" alt="Frog Invader — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">02</span>
-          </div><div sc-camel-on-click="{{ open5 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
+          </div><div role="button" tabindex="0" sc-camel-on-click="{{ open5 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
             <img src="assets/img/tile.webp" alt="Frog Invader — still 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">03</span>
           </div>
@@ -699,7 +704,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         <button sc-camel-on-click="{{ open6 }}" style="align-self:flex-start;display:flex;align-items:center;gap:10px;padding:10px 16px;background:#d6ff3c;color:#050505;font-size:12px;letter-spacing:.12em;opacity:{{ p2.c.op }}" style-hover="background:#e8e8e3">▶ WATCH THE VIDEO</button>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;background:#050505;min-height:0;opacity:{{ p2.b.op }}">
-        <div sc-camel-on-click="{{ open6 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
+        <div role="button" tabindex="0" sc-camel-on-click="{{ open6 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
           <video ref="{{ v6 }}" src="{{ vid.racks }}" poster="assets/img/posters/racks.webp" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
@@ -709,7 +714,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <span style="position:absolute;left:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#fff;background:#050505;padding:2px 6px">{{ tc }}</span>
           <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
         </div>
-        <div sc-camel-on-click="{{ open7 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
+        <div role="button" tabindex="0" sc-camel-on-click="{{ open7 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
           <img src="assets/img/racks-on-racks-1.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
@@ -718,7 +723,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           </div>
           <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
         </div>
-        <div sc-camel-on-click="{{ open8 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
+        <div role="button" tabindex="0" sc-camel-on-click="{{ open8 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
           <img src="assets/img/racks-on-racks-2.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
@@ -727,7 +732,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           </div>
           <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
         </div>
-        <div sc-camel-on-click="{{ open9 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
+        <div role="button" tabindex="0" sc-camel-on-click="{{ open9 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
           <img src="assets/img/racks-on-racks-3.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
@@ -759,7 +764,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         <span style="font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1vw,16px);letter-spacing:.16em;opacity:{{ p3.a.op }}">MUSIC VIDEO</span>
       </div>
       <div class="rm-p3-main" style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:2vw;min-height:0">
-        <div sc-camel-on-click="{{ open1 }}" style="position:relative;min-height:0;overflow:hidden;background:#000;cursor:pointer;clip-path:{{ p3.frame }}">
+        <div role="button" tabindex="0" sc-camel-on-click="{{ open1 }}" style="position:relative;min-height:0;overflow:hidden;background:#000;cursor:pointer;clip-path:{{ p3.frame }}">
           <video ref="{{ v1 }}" src="{{ vid.np }}" poster="assets/img/posters/np.webp" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p3.vid }}"></video>
           <div style="position:absolute;inset:0;box-shadow:inset 0 0 120px rgba(10,11,25,.8)"></div>
           <div style="position:absolute;left:16px;top:14px;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#fff"><span style="width:7px;height:7px;border-radius:50%;background:#8b6cff;opacity:{{ cursor }}"></span>PREVIEW</div>
@@ -771,16 +776,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
             <p class="rm-brief" style="margin:0;font-weight:500;font-size:min(clamp(15px,1.2vw,20px),2.7vh);line-height:1.42;text-wrap:pretty">A music video for artists preparing to launch their career. They came in inspired by the raw aesthetic of 2020s underground US rap videos and wanted that same energy. Beyond matching the style, we made sure the song's title and lyrics shaped the entire visual concept — so the story lives in every frame.</p>
           </div>
           <div class="rm-p3-stills" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;min-height:0;opacity:{{ p3.c.op }};transform:{{ p3.c.tf }}">
-            <div sc-camel-on-click="{{ open13 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
+            <div role="button" tabindex="0" sc-camel-on-click="{{ open13 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
               <img src="assets/img/night-parking-1.webp" alt="Night Parking — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">00:15</span>
-            </div><div sc-camel-on-click="{{ open14 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
+            </div><div role="button" tabindex="0" sc-camel-on-click="{{ open14 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
               <img src="assets/img/night-parking-2.webp" alt="Night Parking — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">01:11</span>
-            </div><div sc-camel-on-click="{{ open15 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
+            </div><div role="button" tabindex="0" sc-camel-on-click="{{ open15 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
               <img src="assets/img/night-parking-3.webp" alt="Night Parking — still 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">01:48</span>
-            </div><div sc-camel-on-click="{{ open16 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
+            </div><div role="button" tabindex="0" sc-camel-on-click="{{ open16 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
               <img src="assets/img/night-parking-4.webp" alt="Night Parking — still 4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">02:07</span>
             </div>
@@ -806,7 +811,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <div class="rm-p4-l" style="position:absolute;left:3vw;top:clamp(60px,9vh,96px);font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.l }};opacity:{{ p4.fade }}">VERTICAL FORMAT</div>
       <div class="rm-p4-r" style="position:absolute;right:3vw;bottom:2vh;font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.r }};opacity:{{ p4.fade }}">VIDEOS</div>
       <sc-for list="{{ p4frames }}" as="fr" hint-placeholder-count="3">
-        <div sc-camel-on-click="{{ fr.open }}" style="position:absolute;left:50%;top:50%;width:{{ fr.w }};height:{{ fr.h }};border-radius:{{ fr.rad }};overflow:hidden;background:#8e2410;cursor:pointer;z-index:{{ fr.z }};opacity:{{ fr.op }};transform:{{ fr.tf }};box-shadow:0 24px 60px rgba(60,10,0,.35)">
+        <div role="button" tabindex="0" sc-camel-on-click="{{ fr.open }}" style="position:absolute;left:50%;top:50%;width:{{ fr.w }};height:{{ fr.h }};border-radius:{{ fr.rad }};overflow:hidden;background:#8e2410;cursor:pointer;z-index:{{ fr.z }};opacity:{{ fr.op }};transform:{{ fr.tf }};box-shadow:0 24px 60px rgba(60,10,0,.35)">
           <video ref="{{ fr.ref }}" src="{{ fr.src }}" poster="{{ fr.poster }}" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <sc-if value="{{ fr.isC }}" hint-placeholder-val="{{ false }}">
             <span style="position:absolute;right:12px;bottom:12px;width:34px;height:34px;border-radius:50%;background:#fff0e3;color:#d23b1d;display:flex;align-items:center;justify-content:center;opacity:{{ p4.fade }}"><svg width="11" height="12" sc-camel-view-box="0 0 11 12" style="display:block;margin-left:2px"><path d="M0 0 L11 6 L0 12 Z" fill="currentColor"></path></svg></span>
@@ -938,7 +943,15 @@ class Component extends DCLogic {
     this.update();
     this.t1 = setTimeout(() => this.setState({ intro: true }), 150);
     this.t2 = setTimeout(() => this.setState({ introDone: true }), 2800);
-    this.onKey = ev => { if (ev.key === 'Escape' && this.state.lb) this.closeLb(); };
+    this.onKey = ev => {
+      if (ev.key === 'Escape' && this.state.lb) this.closeLb();
+      const t = ev.target;
+      if ((ev.key === 'Enter' || ev.key === ' ') && t && t.getAttribute && t.getAttribute('role') === 'button') { ev.preventDefault(); t.click(); }
+    };
+    // #work / #about / #contact deep links and browser back/forward
+    this.onHash = () => { const s = this.hashS(); if (s != null) window.scrollTo({ top: s * this.pace() * window.innerHeight }); };
+    window.addEventListener('popstate', this.onHash);
+    if (this.hashS() != null) setTimeout(this.onHash, 60);
     window.addEventListener('keydown', this.onKey);
     this.iv = setInterval(() => this.setState(s => {
       if (((s.S < 0.3 || s.S > 2.5) && s.S < 12.9) || s.lb) return null;
@@ -951,7 +964,16 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this.onScroll);
     clearTimeout(this.t1); clearTimeout(this.t2); clearInterval(this.iv); clearInterval(this.carIv); this.carIv = null;
     window.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('popstate', this.onHash);
     document.documentElement.style.overflow = '';
+  }
+  hashS() {
+    const h = location.hash.slice(1);
+    return h === 'work' ? 3.8 : h === 'about' || h === 'contact' ? this.END : h === '' || h === 'top' ? 0 : null;
+  }
+  go(hash, s) {
+    if (location.hash !== hash) history.pushState(null, '', hash || location.pathname + location.search);
+    this.scrollToS(s);
   }
   openLb(i) {
     this.refs.forEach(r => r.current && r.current.pause());
@@ -1040,7 +1062,8 @@ class Component extends DCLogic {
     const rnd = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
     const enter = (a, b, dy = 36) => { const t = eo(r(a, b)); return { op: f(t), tf: `translateY(${f((1 - t) * dy)}px)` }; };
     const dim = this.props.videoDim ?? 0.35;
-    const K = this.props.intensity ?? 1;
+    const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const K = reduce ? 0 : this.props.intensity ?? 1;
 
     // hero
     const ho = r(0, 0.9);
@@ -1124,7 +1147,7 @@ class Component extends DCLogic {
       vis: vis(S > 2.9 && tl < 1),
       tf: glitching ? `translateX(${f(-jit * 0.6)}px)` : 'none',
       shade: '0',
-      fx: glitching && rnd(frm * 3 + 1) > 0.8 ? 'invert(1) hue-rotate(90deg)' : 'none',
+      fx: !reduce && glitching && rnd(frm * 3 + 1) > 0.8 ? 'invert(1) hue-rotate(90deg)' : 'none',
       vclip: m1.vclip, vidTf: m1.vidTf,
       a: enter(3.1, 3.5), b: enter(3.2, 3.65), c: enter(3.3, 3.75), e: enter(3.35, 3.8), d: enter(3.4, 3.85),
     };
@@ -1135,7 +1158,7 @@ class Component extends DCLogic {
       const pts = ['0% 0%']; let y = 0;
       for (let i = 0; i < n; i++) {
         const y1 = y + hs[i] / tot * 100, thr = rnd(i * 7 + 3) * 0.85;
-        const on = tl > thr && !(tl - thr < 0.08 && rnd(frm + i * 13) > 0.5);
+        const on = tl > thr && (reduce || !(tl - thr < 0.08 && rnd(frm + i * 13) > 0.5));
         if (on) pts.push(`0% ${f(y)}%`, `100% ${f(y)}%`, `100% ${f(y1)}%`, `0% ${f(y1)}%`);
         y = y1;
       }
@@ -1143,7 +1166,7 @@ class Component extends DCLogic {
       clip2 = `polygon(${pts.join(',')})`;
     }
     const bars = [];
-    if (glitching) for (let k = 0; k < 5; k++) {
+    if (glitching && !reduce) for (let k = 0; k < 5; k++) {
       const q = frm * 5 + k;
       bars.push({
         t: `${f(rnd(q) * 100)}%`, h: `${f(0.4 + rnd(q + 1) * 5)}%`,
@@ -1282,9 +1305,9 @@ class Component extends DCLogic {
       lbEnded: () => { const lb = this.state.lb; if (lb && lb.i === 12 && !lb.part) this.setState({ lb: { i: 12, part: 1 } }); },
       closeLb: () => this.closeLb(),
       stop: ev => ev.stopPropagation(),
-      goTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
-      goWork: () => this.scrollToS(3.8),
-      goAbout: () => this.scrollToS(this.END),
+      goTop: () => this.go('', 0),
+      goWork: () => this.go('#work', 3.8),
+      goAbout: () => this.go('#about', this.END),
     });
   }
 }
