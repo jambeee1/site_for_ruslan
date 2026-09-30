@@ -38,13 +38,14 @@ python3 -m http.server 8000
 
 Затем подключить свой домен в настройках хостинга (HTTPS включится автоматически).
 
-### После подключения домена
+### Домен
 
-1. В `index.html` сделать ссылки на превью абсолютными: `og:image` и `twitter:image` → `https://ДОМЕН/assets/img/og-cover.jpg`. Добавить `<meta property="og:url" content="https://ДОМЕН/">` и `<link rel="canonical" href="https://ДОМЕН/">`. Telegram и Facebook не показывают картинку по относительной ссылке.
-2. Создать `sitemap.xml` с адресом `https://ДОМЕН/` и добавить в `robots.txt` строку `Sitemap: https://ДОМЕН/sitemap.xml`.
-3. Добавить сайт в Google Search Console и Яндекс Вебмастер.
-4. Проверить превью ссылки: https://www.opengraph.xyz или отправить ссылку себе в Telegram.
-5. По желанию подключить аналитику (Plausible, Umami или GA4): одна строка `<script>` в `<head>`.
+Сайт настроен на адрес **https://ruslanthedirector.online/**: канонический адрес, полные ссылки на обложку для превью, `sitemap.xml` и строка `Sitemap` в `robots.txt`. Если адрес поменяется, найдите и замените `ruslanthedirector.online` во всех этих файлах.
+
+После запуска:
+1. Добавить сайт в Google Search Console и Яндекс Вебмастер, отправить `sitemap.xml`.
+2. Проверить превью ссылки: https://www.opengraph.xyz или отправить ссылку себе в Telegram.
+3. По желанию подключить аналитику (Cloudflare Web Analytics, Plausible или GA4).
 
 ## Как править контент
 
