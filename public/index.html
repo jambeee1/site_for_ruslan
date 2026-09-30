@@ -986,6 +986,8 @@ class Component extends DCLogic {
     clearTimeout(this.t1); clearTimeout(this.t2); clearInterval(this.iv); clearInterval(this.carIv); this.carIv = null;
     window.removeEventListener('keydown', this.onKey);
     window.removeEventListener('popstate', this.onHash);
+    cancelAnimationFrame(this.navRaf);
+    if (this.stopNav) ['wheel', 'touchstart', 'keydown'].forEach(t => window.removeEventListener(t, this.stopNav));
     document.documentElement.style.overflow = '';
   }
   hashS() {
@@ -1083,7 +1085,31 @@ class Component extends DCLogic {
       else if ((!on || this.state.lb) && !v.paused) v.pause();
     });
   }
-  scrollToS(s) { window.scrollTo({ top: s * this.pace() * this.unit(), behavior: 'smooth' }); }
+  // Animated jump to scene s. Native smooth scrolling is unreliable here: iOS Safari
+  // abandons long smooth scrolls part-way (CONTACT stopped on the vertical-video block).
+  // Drive it frame by frame, re-reading the target each frame, then settle on it.
+  // Any touch / wheel / key from the visitor hands control back immediately.
+  scrollToS(s) {
+    cancelAnimationFrame(this.navRaf);
+    const target = () => s * this.pace() * this.unit();
+    const jump = y => window.scrollTo({ top: y, behavior: 'instant' });
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const from = window.scrollY, dist = Math.abs(target() - from) / this.unit();
+    const dur = reduce ? 0 : Math.min(1800, 500 + dist * 120), t0 = performance.now();
+    let settle = 0;
+    const step = now => {
+      const u = dur ? Math.min(1, (now - t0) / dur) : 1;
+      const e = u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+      const to = target();
+      jump(u < 1 ? from + (to - from) * e : to);
+      if (u < 1 || (Math.abs(window.scrollY - to) > 1 && settle++ < 30) || settle++ < 6) this.navRaf = requestAnimationFrame(step);
+    };
+    if (!this.stopNav) {
+      this.stopNav = () => cancelAnimationFrame(this.navRaf);
+      ['wheel', 'touchstart', 'keydown'].forEach(t => window.addEventListener(t, this.stopNav, { passive: true }));
+    }
+    this.navRaf = requestAnimationFrame(step);
+  }
 
   renderVals() {
     const { S, vw, vh, intro, introDone } = this.state;
