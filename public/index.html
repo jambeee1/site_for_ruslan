@@ -558,6 +558,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .rm-hud{padding:16px !important;gap:12px !important;font-size:11px !important;letter-spacing:.1em !important}
   .rm-hud > div{gap:18px !important}
   .rm-hud-label,.rm-hud-about{display:none !important}
+  /* full-screen SVG blur is too heavy for phone GPUs (esp. Safari): plain blobs instead */
+  .rm-goo{filter:none !important}
   .rm-progress{left:16px !important;right:16px !important;bottom:12px !important}
 
   .rm-name{flex-wrap:wrap !important;font-size:14vw !important;line-height:.9 !important}
@@ -755,7 +757,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   </div>
 
   <!-- SHIFT 3 · liquid metaballs -->
-  <div style="position:absolute;inset:0;filter:url(#rm-goo);visibility:{{ gooVis }}">
+  <div class="rm-goo" style="position:absolute;inset:0;filter:url(#rm-goo);visibility:{{ gooVis }}">
     <sc-for list="{{ blobs }}" as="b" hint-placeholder-count="0">
       <div style="position:absolute;left:{{ b.l }};top:{{ b.t }};width:{{ b.s }};height:{{ b.s }};border-radius:50%;background:#0a0b19;transform:translate(-50%,-50%)"></div>
     </sc-for>
@@ -968,7 +970,7 @@ class Component extends DCLogic {
       if ((ev.key === 'Enter' || ev.key === ' ') && t && t.getAttribute && t.getAttribute('role') === 'button') { ev.preventDefault(); t.click(); }
     };
     // #work / #about / #contact deep links and browser back/forward
-    this.onHash = () => { const s = this.hashS(); if (s != null) window.scrollTo({ top: s * this.pace() * window.innerHeight }); };
+    this.onHash = () => { const s = this.hashS(); if (s != null) window.scrollTo({ top: s * this.pace() * this.unit() }); };
     window.addEventListener('popstate', this.onHash);
     if (this.hashS() != null) setTimeout(this.onHash, 60);
     window.addEventListener('keydown', this.onKey);
@@ -1058,10 +1060,21 @@ class Component extends DCLogic {
   // Screen-heights of scrolling per scene step. Phones scroll in short swipes, so the
   // same choreography runs over ~40% less distance there.
   pace() { return (this.props.pace ?? 1) * (window.innerWidth < 760 ? 0.6 : 1); }
+  // Pixels of scroll per scene unit. Mobile Safari grows innerHeight while the address
+  // bar collapses mid-scroll, which shifted every scene (CONTACT stopped short of About).
+  // The large viewport height (100lvh) stays put, so scroll <-> scene mapping is stable.
+  unit() {
+    if (!this.unitEl) {
+      const el = document.createElement('div');
+      el.style.cssText = 'position:fixed;top:0;left:0;width:0;visibility:hidden;pointer-events:none;height:' + (window.CSS && CSS.supports('height', '100lvh') ? '100lvh' : '100vh');
+      document.body.appendChild(el); this.unitEl = el;
+    }
+    return this.unitEl.offsetHeight || window.innerHeight;
+  }
   update() {
     this.armCar();
     const vh = window.innerHeight, vw = window.innerWidth;
-    const S = window.scrollY / vh / this.pace();
+    const S = window.scrollY / this.unit() / this.pace();
     this.setState({ S, vw, vh });
     this.refs.forEach((r, i) => {
       const v = r.current, rg = this.ranges[i]; if (!v || !rg) return;
@@ -1070,7 +1083,7 @@ class Component extends DCLogic {
       else if ((!on || this.state.lb) && !v.paused) v.pause();
     });
   }
-  scrollToS(s) { window.scrollTo({ top: s * this.pace() * window.innerHeight, behavior: 'smooth' }); }
+  scrollToS(s) { window.scrollTo({ top: s * this.pace() * this.unit(), behavior: 'smooth' }); }
 
   renderVals() {
     const { S, vw, vh, intro, introDone } = this.state;
@@ -1308,7 +1321,7 @@ class Component extends DCLogic {
       hudLabel,
       progress: `${f(cl(S / this.END) * 100)}%`,
       progOp: f(1 - r(12.9, 13.3)),
-      trackH: `${(this.END * this.pace() + 1) * 100}vh`,
+      trackH: `calc(${f(this.END * this.pace() * this.unit())}px + 100vh)`,
       marquee: this.buildMarquee(),
       stampOn: false && !this.state.lb && S > 13.4,
       stampRing: this.buildStamp(),
