@@ -476,6 +476,53 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @keyframes rm-spin{to{transform:rotate(360deg)}}
 @keyframes rm-marq-r{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 @keyframes rm-morph{0%{border-radius:50%;transform:rotate(0)}25%{border-radius:3px;transform:rotate(45deg)}50%{border-radius:50% 0;transform:rotate(90deg)}75%{border-radius:0 50%;transform:rotate(180deg)}100%{border-radius:50%;transform:rotate(360deg)}}
+
+/* ── Phones & narrow tablets: stack every two-column layout so each
+   scene still fits one screen. !important overrides the inline styles. */
+@media (max-width: 760px) {
+  .rm-hud{padding:16px !important;gap:12px !important;font-size:11px !important;letter-spacing:.1em !important}
+  .rm-hud > div{gap:18px !important}
+  .rm-hud-label,.rm-hud-about{display:none !important}
+  .rm-progress{left:16px !important;right:16px !important;bottom:12px !important}
+
+  .rm-name{flex-wrap:wrap !important;font-size:14vw !important;line-height:.9 !important}
+  .rm-name > span:nth-child(7){flex-basis:100%;height:0}
+
+  .rm-brief{font-size:13.5px !important;line-height:1.4 !important}
+
+  .rm-p1-grid{grid-template-columns:minmax(0,1fr) !important;grid-template-rows:minmax(0,1fr) auto !important;gap:14px !important;padding:64px 16px 16px !important}
+  .rm-p1-side{grid-template-rows:auto auto auto 15svh !important;gap:12px !important}
+  .rm-p1-title{font-size:40px !important}
+  .rm-p1-stills{gap:8px !important}
+
+  .rm-p2-grid{grid-template-columns:minmax(0,1fr) !important;grid-template-rows:auto minmax(0,1fr) !important}
+  .rm-p2-text{height:auto !important;padding:60px 16px 14px !important;gap:14px !important}
+  .rm-p2-brief{font-size:12px !important;line-height:1.5 !important}
+
+  .rm-p3-meta{grid-template-columns:1fr 1fr !important;row-gap:6px !important;font-size:10px !important}
+  .rm-p3-meta > span:nth-child(4){text-align:left !important}
+  .rm-p3-title{font-size:7.4vw !important}
+  .rm-p3-main{grid-template-columns:minmax(0,1fr) !important;grid-template-rows:minmax(0,1fr) auto !important;gap:12px !important}
+  .rm-p3-side{grid-template-rows:auto auto !important;gap:12px !important}
+  .rm-p3-stills{grid-template-columns:repeat(4,minmax(0,1fr)) !important;grid-template-rows:12svh !important}
+  .rm-p3-watch{right:10px !important;bottom:10px !important;padding:9px 14px !important;font-size:11px !important}
+  [data-screen-label="03 Night Parking"] > div:first-child{padding:60px 16px 16px !important;gap:12px !important}
+
+  .rm-p4-l,.rm-p4-r{font-size:7.6vw !important;top:64px !important}
+  .rm-p4-l{left:16px !important}
+  .rm-p4-r{right:16px !important;bottom:auto !important;top:calc(64px + 7.2vw) !important}
+  .rm-p4-desc{left:16px !important;right:16px !important;width:auto !important;top:auto !important;bottom:5svh !important}
+
+  .rm-ab-grid{grid-template-columns:minmax(0,1fr) !important;grid-template-rows:auto auto !important;align-content:start;gap:22px !important;padding:64px 16px calc(24px + 56px) !important;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .rm-ab-grid{display:block !important}
+  .rm-ab-grid > div + div{margin-top:22px}
+  .rm-ab-photo{aspect-ratio:16/11 !important;max-height:none !important;width:100%}
+  .rm-ab-h{font-size:28px !important}
+  .rm-ab-text{font-size:15px !important}
+  .rm-ab-mail{font-size:22px !important;overflow-wrap:anywhere}
+  .rm-ab-foot{flex-direction:column !important;align-items:flex-start !important}
+  .rm-ab-foot > div:last-child{gap:22px !important}
+}
 </style>
 </helmet>
 
@@ -487,7 +534,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     </div>
     <div style="position:absolute;inset:0;background:#000;opacity:{{ hero.dim }}"></div>
     <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(12px,2vh,24px);padding:0 3vw">
-      <div style="display:flex;justify-content:center;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:clamp(34px,6.8vw,150px);line-height:.9;letter-spacing:-0.02em;color:#f4f2ec">
+      <div class="rm-name" style="display:flex;justify-content:center;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:112%;font-size:clamp(34px,6.8vw,150px);line-height:.9;letter-spacing:-0.02em;color:#f4f2ec">
         <sc-for list="{{ letters }}" as="l" hint-placeholder-count="15">
           <span style="display:inline-block;white-space:pre;opacity:{{ l.op }};transform:{{ l.tf }};filter:{{ l.blur }};transition:{{ l.tr }}">{{ l.ch }}</span>
         </sc-for>
@@ -526,7 +573,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   <!-- 01 FROG INVADER -->
   <div data-screen-label="01 Frog Invader" style="position:absolute;inset:0;background:#f4f4f1;color:#0f0f0f;visibility:{{ p1.vis }};transform:{{ p1.tf }};filter:{{ p1.fx }};transform-origin:50% 0%;overflow:hidden;font-family:'Manrope',sans-serif">
-    <div style="position:absolute;inset:0;box-sizing:border-box;padding:clamp(64px,10vh,100px) 2.4vw 2.4vw;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2vw">
+    <div class="rm-p1-grid" style="position:absolute;inset:0;box-sizing:border-box;padding:clamp(64px,10vh,100px) 2.4vw 2.4vw;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2vw">
       <div sc-camel-on-click="{{ open2 }}" style="position:relative;min-height:0;border-radius:24px;overflow:hidden;background:#0f0f0f;cursor:pointer;clip-path:{{ p1.vclip }}">
         <video ref="{{ v2 }}" src="assets/video/frog.webm" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p1.vidTf }}"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.5))"></div>
@@ -535,18 +582,18 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <span style="display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:#ff7a1a;color:#0f0f0f">▶ Play film</span>
         </div>
       </div>
-      <div style="display:grid;grid-template-rows:auto auto minmax(0,1fr) minmax(0,.9fr);gap:3vh;min-height:0">
+      <div class="rm-p1-side" style="display:grid;grid-template-rows:auto auto minmax(0,1fr) minmax(0,.9fr);gap:3vh;min-height:0">
         <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;font-weight:600;letter-spacing:.02em;opacity:{{ p1.a.op }};transform:{{ p1.a.tf }}">
           <span style="padding:7px 14px;border-radius:999px;background:#0f0f0f;color:#f4f4f1;white-space:nowrap">01 / 04</span><span style="padding:7px 14px;border-radius:999px;border:1px solid rgba(15,15,15,.25);white-space:nowrap">Brand video</span><span style="padding:7px 14px;border-radius:999px;border:1px solid rgba(15,15,15,.25);white-space:nowrap">Instagram sticker shop</span>
         </div>
         <div style="position:relative;opacity:{{ p1.a.op }};transform:{{ p1.a.tf }}">
-          <h2 style="margin:0;font-family:'Manrope',sans-serif;font-weight:600;font-size:min(clamp(48px,5.6vw,108px),12vh);line-height:.92;letter-spacing:-0.06em">Frog<br>Invader<span style="color:#ff7a1a">.</span></h2>
+          <h2 class="rm-p1-title" style="margin:0;font-family:'Manrope',sans-serif;font-weight:600;font-size:min(clamp(48px,5.6vw,108px),12vh);line-height:.92;letter-spacing:-0.06em">Frog<br>Invader<span style="color:#ff7a1a">.</span></h2>
         </div>
         <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-height:0;opacity:{{ p1.b.op }};transform:{{ p1.b.tf }}">
           <span style="font-size:11px;font-weight:700;letter-spacing:.14em;color:#6b6b66">BRIEF</span>
-          <p style="margin:0;font-size:min(clamp(15px,1.2vw,20px),2.7vh);font-weight:500;line-height:1.42;letter-spacing:-0.01em;text-wrap:pretty">A brand video for Frog Invader, an Instagram sticker shop. At the time, they enjoyed huge local recognition across the city, with their stickers visible on almost every corner. The concept was designed to highlight that street presence while spotlighting the brand's vibrant identity.</p>
+          <p class="rm-brief" style="margin:0;font-size:min(clamp(15px,1.2vw,20px),2.7vh);font-weight:500;line-height:1.42;letter-spacing:-0.01em;text-wrap:pretty">A brand video for Frog Invader, an Instagram sticker shop. At the time, they enjoyed huge local recognition across the city, with their stickers visible on almost every corner. The concept was designed to highlight that street presence while spotlighting the brand's vibrant identity.</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;opacity:{{ p1.e.op }};transform:{{ p1.e.tf }}">
+        <div class="rm-p1-stills" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;opacity:{{ p1.e.op }};transform:{{ p1.e.tf }}">
           <div sc-camel-on-click="{{ open3 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
             <img src="assets/img/frog-invader-1.jpg" alt="Frog Invader — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">01</span>
@@ -575,14 +622,14 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   <!-- 02 RACKS ON RACKS -->
   <div data-screen-label="02 Racks On Racks" style="position:absolute;inset:0;background:#050505;color:#e8e8e3;visibility:{{ p2.vis }};clip-path:{{ p2.clip }};transform:{{ p2.zoom }};filter:{{ p2.blur }};transform-origin:50% 25%;overflow:hidden;font-family:'JetBrains Mono',monospace">
-    <div style="position:absolute;inset:0;display:grid;grid-template-columns:minmax(300px,4fr) minmax(0,8fr);transform:{{ p2.tf }}">
-      <div style="display:flex;flex-direction:column;justify-content:space-between;gap:3vh;padding:clamp(64px,10vh,100px) 2.4vw 3vh;min-height:0;overflow:hidden;box-sizing:border-box;height:100vh">
+    <div class="rm-p2-grid" style="position:absolute;inset:0;display:grid;grid-template-columns:minmax(300px,4fr) minmax(0,8fr);transform:{{ p2.tf }}">
+      <div class="rm-p2-text" style="display:flex;flex-direction:column;justify-content:space-between;gap:3vh;padding:clamp(64px,10vh,100px) 2.4vw 3vh;min-height:0;overflow:hidden;box-sizing:border-box;height:100vh">
         <div style="display:flex;flex-direction:column;gap:1.6vh;opacity:{{ p2.a.op }};transform:{{ p2.a.tf }}">
           <span style="font-size:11px;letter-spacing:.14em;color:#8a8a85">[02/04] MUSIC VIDEO · 2023</span>
           <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:min(clamp(28px,2.7vw,52px),6.4vh);line-height:.95;letter-spacing:-0.05em;text-transform:uppercase">Racks On Racks<span style="color:#d6ff3c;opacity:{{ cursor }}">_</span></span>
           <span style="font-size:13px;letter-spacing:.06em">PRODBYRL <span style="color:#8a8a85">(MUSIC VIDEO)</span></span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px;font-size:min(clamp(12px,.92vw,15px),2.1vh);line-height:1.6;opacity:{{ p2.b.op }};transform:{{ p2.b.tf }}">
+        <div class="rm-p2-brief" style="display:flex;flex-direction:column;gap:10px;font-size:min(clamp(12px,.92vw,15px),2.1vh);line-height:1.6;opacity:{{ p2.b.op }};transform:{{ p2.b.tf }}">
           <span style="color:#d6ff3c">&gt; BRIEF</span>
           <p style="margin:0;text-wrap:pretty">Back in 2023, London producer Prodbyrl sparked a massive trend on TikTok with his instrumental. It kept popping up all over my FYP, and that's where the inspiration came from. I developed a concept, drew up a storyboard, called my friend, and we started filming.</p>
           <p style="margin:0;text-wrap:pretty;color:#b9b9b3">The main challenge was shooting in such a small room, BUT different camera angles and diverse color schemes made it work. And I bet you won't even notice how small that room really was...</p>
@@ -642,26 +689,26 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <!-- 03 NIGHT PARKING (SHIFT 3 · signal loss) -->
   <div data-screen-label="03 Night Parking" style="position:absolute;inset:0;background:#0a0b19;color:#cfd5ff;visibility:{{ p3.vis }};opacity:{{ p3.op }};overflow:hidden;font-family:'Archivo',sans-serif">
     <div style="position:absolute;inset:0;box-sizing:border-box;transform:{{ p3.tf }};padding:clamp(64px,10vh,100px) 3vw 3vh;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:2.4vh">
-      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2vw;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;padding-bottom:12px;border-bottom:1px solid rgba(207,213,255,.3);opacity:{{ p3.a.op }};transform:{{ p3.a.tf }}">
+      <div class="rm-p3-meta" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2vw;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;padding-bottom:12px;border-bottom:1px solid rgba(207,213,255,.3);opacity:{{ p3.a.op }};transform:{{ p3.a.tf }}">
         <span>03 / 04</span><span>MUSIC VIDEO</span><span>STATUS: <span style="color:#8b6cff">UNRELEASED</span></span><span style="text-align:right">RUNTIME 02:29</span>
       </div>
       <div style="display:flex;align-items:baseline;flex-wrap:wrap;column-gap:1.4vw;row-gap:.4vh">
-        <div style="font-family:'Anton',sans-serif;font-size:min(6vw,9.5vh);line-height:1;padding-top:.08em;white-space:nowrap;transform-origin:0 100%;letter-spacing:{{ p3.ls }};transform:{{ p3.title }}"><span style="color:#8b6cff">NOOFFICIAL</span> <span style="display:inline-block;width:.5em;height:.09em;background:currentColor;vertical-align:.33em;margin:0 .06em"></span> NIGHT PARKING</div>
+        <div class="rm-p3-title" style="font-family:'Anton',sans-serif;font-size:min(6vw,9.5vh);line-height:1;padding-top:.08em;white-space:nowrap;transform-origin:0 100%;letter-spacing:{{ p3.ls }};transform:{{ p3.title }}"><span style="color:#8b6cff">NOOFFICIAL</span> <span style="display:inline-block;width:.5em;height:.09em;background:currentColor;vertical-align:.33em;margin:0 .06em"></span> NIGHT PARKING</div>
         <span style="font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1vw,16px);letter-spacing:.16em;opacity:{{ p3.a.op }}">MUSIC VIDEO</span>
       </div>
-      <div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:2vw;min-height:0">
+      <div class="rm-p3-main" style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:2vw;min-height:0">
         <div sc-camel-on-click="{{ open1 }}" style="position:relative;min-height:0;overflow:hidden;background:#000;cursor:pointer;clip-path:{{ p3.frame }}">
           <video ref="{{ v1 }}" src="assets/video/np.webm" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p3.vid }}"></video>
           <div style="position:absolute;inset:0;box-shadow:inset 0 0 120px rgba(10,11,25,.8)"></div>
           <div style="position:absolute;left:16px;top:14px;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#fff"><span style="width:7px;height:7px;border-radius:50%;background:#8b6cff;opacity:{{ cursor }}"></span>PREVIEW</div>
-          <div style="position:absolute;right:16px;bottom:14px;display:flex;align-items:center;gap:12px;padding:12px 20px;background:#cfd5ff;color:#0a0b19;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.14em" style-hover="background:#fff">▶ WATCH FULL VIDEO</div>
+          <div class="rm-p3-watch" style="position:absolute;right:16px;bottom:14px;display:flex;align-items:center;gap:12px;padding:12px 20px;background:#cfd5ff;color:#0a0b19;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.14em" style-hover="background:#fff">▶ WATCH FULL VIDEO</div>
         </div>
-        <div style="display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;min-height:0">
+        <div class="rm-p3-side" style="display:grid;grid-template-rows:auto minmax(0,1fr);gap:2.4vh;min-height:0">
           <div style="display:flex;flex-direction:column;gap:10px;opacity:{{ p3.b.op }};transform:{{ p3.b.tf }}">
             <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:#8b6cff">// BRIEF</span>
-            <p style="margin:0;font-weight:500;font-size:min(clamp(15px,1.2vw,20px),2.7vh);line-height:1.42;text-wrap:pretty">A music video for artists preparing to launch their career. They came in inspired by the raw aesthetic of 2020s underground US rap videos and wanted that same energy. Beyond matching the style, we made sure the song's title and lyrics shaped the entire visual concept — so the story lives in every frame.</p>
+            <p class="rm-brief" style="margin:0;font-weight:500;font-size:min(clamp(15px,1.2vw,20px),2.7vh);line-height:1.42;text-wrap:pretty">A music video for artists preparing to launch their career. They came in inspired by the raw aesthetic of 2020s underground US rap videos and wanted that same energy. Beyond matching the style, we made sure the song's title and lyrics shaped the entire visual concept — so the story lives in every frame.</p>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;min-height:0;opacity:{{ p3.c.op }};transform:{{ p3.c.tf }}">
+          <div class="rm-p3-stills" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;min-height:0;opacity:{{ p3.c.op }};transform:{{ p3.c.tf }}">
             <div sc-camel-on-click="{{ open13 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
               <img src="assets/img/night-parking-1.jpg" alt="Night Parking — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">00:15</span>
@@ -694,8 +741,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <!-- 04 QUIET HOURS (SHIFT 4 · aperture) -->
   <div data-screen-label="04 Vertical Format Videos" style="position:absolute;inset:0;background:#d23b1d;color:#fff0e3;visibility:{{ p4.vis }};clip-path:{{ p4.clip }};overflow:hidden;font-family:'Unbounded',sans-serif">
     <div style="position:absolute;inset:0;transform:{{ p4.tf }}">
-      <div style="position:absolute;left:3vw;top:clamp(60px,9vh,96px);font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.l }};opacity:{{ p4.fade }}">VERTICAL FORMAT</div>
-      <div style="position:absolute;right:3vw;bottom:2vh;font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.r }};opacity:{{ p4.fade }}">VIDEOS</div>
+      <div class="rm-p4-l" style="position:absolute;left:3vw;top:clamp(60px,9vh,96px);font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.l }};opacity:{{ p4.fade }}">VERTICAL FORMAT</div>
+      <div class="rm-p4-r" style="position:absolute;right:3vw;bottom:2vh;font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.r }};opacity:{{ p4.fade }}">VIDEOS</div>
       <sc-for list="{{ p4frames }}" as="fr" hint-placeholder-count="3">
         <div sc-camel-on-click="{{ fr.open }}" style="position:absolute;left:50%;top:50%;width:{{ fr.w }};height:{{ fr.h }};border-radius:{{ fr.rad }};overflow:hidden;background:#8e2410;cursor:pointer;z-index:{{ fr.z }};opacity:{{ fr.op }};transform:{{ fr.tf }};box-shadow:0 24px 60px rgba(60,10,0,.35)">
           <video ref="{{ fr.ref }}" src="{{ fr.src }}" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
@@ -704,7 +751,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           </sc-if>
         </div>
       </sc-for>
-      <div style="position:absolute;left:3vw;top:42vh;width:min(24vw,340px);display:flex;flex-direction:column;gap:10px;opacity:{{ p4.b.op }};transform:{{ p4.b.tf }}">
+      <div class="rm-p4-desc" style="position:absolute;left:3vw;top:42vh;width:min(24vw,340px);display:flex;flex-direction:column;gap:10px;opacity:{{ p4.b.op }};transform:{{ p4.b.tf }}">
         <span style="font-weight:500;font-size:11px;letter-spacing:.14em">04 — 9:16 · BRAND · FASHION · MUSIC</span>
         <p style="margin:0;font-weight:300;font-size:min(clamp(13px,1vw,17px),2.1vh);line-height:1.5;text-wrap:pretty"><span style="font-weight:500">Vertical isn't optional anymore — it's essential.</span> And I treat it with the same creative rigor as any horizontal project. Whether it's a brand story, fashion campaign, commercial, or even a music video, I deliver everything in 9:16 for my clients' social media.</p>
       </div>
@@ -720,20 +767,20 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   <!-- ABOUT (SHIFT 5 · frame → sheet) -->
   <div data-screen-label="About" style="position:absolute;inset:0;background:#0e0e0e;color:#efede7;visibility:{{ ab.vis }};transform:{{ ab.tf }};border-radius:{{ ab.rad }};overflow:hidden;font-family:'Archivo',sans-serif">
-    <div style="position:absolute;inset:0;padding:clamp(76px,11vh,110px) 4vw {{ cv.padB }};display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:5vw">
-      <div style="position:relative;align-self:start;aspect-ratio:4/5;max-height:78vh;overflow:hidden;background:#1a1a1a;opacity:{{ ab.a.op }};transform:{{ ab.a.tf }}">
+    <div class="rm-ab-grid" style="position:absolute;inset:0;padding:clamp(76px,11vh,110px) 4vw {{ cv.padB }};display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:5vw">
+      <div class="rm-ab-photo" style="position:relative;align-self:start;aspect-ratio:4/5;max-height:78vh;overflow:hidden;background:#1a1a1a;opacity:{{ ab.a.op }};transform:{{ ab.a.tf }}">
         <img src="assets/img/about-1.jpg" alt="Ruslan Matuliak" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%">
       </div>
       <div style="display:flex;flex-direction:column;justify-content:space-between;gap:4vh;min-height:0">
         <div style="display:flex;flex-direction:column;gap:3.5vh">
           <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;opacity:{{ ab.a.op }}">ABOUT</span>
-          <h2 style="margin:0;font-weight:800;font-stretch:110%;font-size:clamp(30px,3.8vw,72px);line-height:1;letter-spacing:-0.02em;text-wrap:balance;opacity:{{ ab.b.op }};transform:{{ ab.b.tf }}">Every project starts with listening. The form follows the story.</h2>
-          <div style="max-width:80ch;font-size:clamp(15px,1.1vw,18px);line-height:1.5;color:#a9a69e;opacity:{{ ab.c.op }};transform:{{ ab.c.tf }}">
+          <h2 class="rm-ab-h" style="margin:0;font-weight:800;font-stretch:110%;font-size:clamp(30px,3.8vw,72px);line-height:1;letter-spacing:-0.02em;text-wrap:balance;opacity:{{ ab.b.op }};transform:{{ ab.b.tf }}">Every project starts with listening. The form follows the story.</h2>
+          <div class="rm-ab-text" style="max-width:80ch;font-size:clamp(15px,1.1vw,18px);line-height:1.5;color:#a9a69e;opacity:{{ ab.c.op }};transform:{{ ab.c.tf }}">
             <p style="margin:0;text-wrap:pretty">My name is Ruslan, and I create video content across the entire production process — from the idea and script to directing on set and delivering the final edit. I specialize in commercial, brand, and music video production for brands and artists who want more than just beautiful visuals — they want a story. A unique story that shows who they are and what they truly stand for.</p>
           </div>
         </div>
-        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:2.4vh;border-top:1px solid rgba(239,237,231,.25);opacity:{{ ab.d.op }};transform:{{ ab.d.tf }}">
-          <div style="display:flex;flex-direction:column;gap:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.2em;color:#d6ff3c">CONTACT</span><a href="mailto:RuslanTheD1r@outlook.com" style="font-weight:800;font-stretch:110%;font-size:clamp(20px,2.2vw,40px);letter-spacing:-0.01em">RuslanTheD1r@outlook.com</a><sc-if value="{{ cv.pill }}" hint-placeholder-val="{{ true }}"><a href="mailto:jambee@fuck.it" style="display:flex;align-items:center;gap:14px;align-self:flex-start;padding:10px 18px 10px 12px;border-radius:999px;background:#efede7;color:#151515" style-hover="background:#d6ff3c">
+        <div class="rm-ab-foot" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:2.4vh;border-top:1px solid rgba(239,237,231,.25);opacity:{{ ab.d.op }};transform:{{ ab.d.tf }}">
+          <div style="display:flex;flex-direction:column;gap:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.2em;color:#d6ff3c">CONTACT</span><a class="rm-ab-mail" href="mailto:RuslanTheD1r@outlook.com" style="font-weight:800;font-stretch:110%;font-size:clamp(20px,2.2vw,40px);letter-spacing:-0.01em">RuslanTheD1r@outlook.com</a><sc-if value="{{ cv.pill }}" hint-placeholder-val="{{ true }}"><a href="mailto:jambee@fuck.it" style="display:flex;align-items:center;gap:14px;align-self:flex-start;padding:10px 18px 10px 12px;border-radius:999px;background:#efede7;color:#151515" style-hover="background:#d6ff3c">
               <span style="width:22px;height:22px;border-radius:{{ cr.rad }};background:#d6ff3c;transform:{{ cr.rot }};transition:border-radius .35s ease,transform .35s ease"></span>
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.6">SITE SHAPESHIFTED BY</span>
               <span style="font-family:{{ cr.ff }};font-weight:{{ cr.fw }};font-style:{{ cr.fs }};font-stretch:{{ cr.fst }};font-size:17px;letter-spacing:{{ cr.ls }};min-width:9.5em">jambee@fuck.it</span>
@@ -781,16 +828,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   </sc-if>
 
   <sc-if value="{{ showHud }}" hint-placeholder-val="{{ true }}">
-    <div style="position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4vw;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;mix-blend-mode:difference;z-index:10">
+    <div class="rm-hud" style="position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4vw;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;mix-blend-mode:difference;z-index:10">
       <button sc-camel-on-click="{{ goTop }}" style="letter-spacing:.14em;font-weight:600;opacity:{{ hudNameOp }}">RUSLAN MATULIAK</button>
-      <span>{{ hudLabel }}</span>
+      <span>{{ class="rm-hud-label" hudLabel }}</span>
       <div style="display:flex;gap:28px">
         <button sc-camel-on-click="{{ goWork }}" style="letter-spacing:.14em">WORK</button>
-        <button sc-camel-on-click="{{ goAbout }}" style="letter-spacing:.14em">ABOUT</button>
+        <button class="rm-hud-about" sc-camel-on-click="{{ goAbout }}" style="letter-spacing:.14em">ABOUT</button>
         <button sc-camel-on-click="{{ goAbout }}" style="letter-spacing:.14em;padding:6px 12px;margin:-6px 0;border:1px solid #fff;border-radius:999px">CONTACT</button>
       </div>
     </div>
-    <div style="position:absolute;left:4vw;right:4vw;bottom:18px;height:1px;background:rgba(255,255,255,.25);mix-blend-mode:difference;z-index:10">
+    <div class="rm-progress" style="position:absolute;left:4vw;right:4vw;bottom:18px;height:1px;opacity:{{ progOp }};background:rgba(255,255,255,.25);mix-blend-mode:difference;z-index:10">
       <div style="height:1px;background:#fff;width:{{ progress }}"></div>
     </div>
   </sc-if>
@@ -1120,6 +1167,9 @@ class Component extends DCLogic {
       const z = crossing ? 1 : Math.round(2 + cen * 2);
       x *= fl; rr *= fl; y += (1 - fl) * ey;
       const slot = Math.round(sp) % 3, isC = slot === 0;
+      // Phones: shrink the carousel so the titles above and the brief below stay clear
+      const k4 = vw >= 760 ? 1 : vh < 700 ? 0.6 : 0.72;
+      x *= k4; y = y * k4 + (vw >= 760 ? 0 : vh < 700 ? -3 : 2); w *= k4; hh *= k4;
       const W = `${f(w)}vh`, H = `${f(hh)}vh`, rad = 16;
       if (t5 > 0) { if (isC) y += 40 * t5; else x += Math.sign(x || 1) * 30 * t5; }
       const op = 1 - t5;
@@ -1150,6 +1200,7 @@ class Component extends DCLogic {
       hudNameOp: f(r(0.5, 1.0)),
       hudLabel,
       progress: `${f(cl(S / this.END) * 100)}%`,
+      progOp: f(1 - r(12.9, 13.3)),
       trackH: `${(this.END * this.pace() + 1) * 100}vh`,
       marquee: this.buildMarquee(),
       stampOn: false && !this.state.lb && S > 13.4,
