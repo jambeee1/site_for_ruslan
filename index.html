@@ -944,9 +944,10 @@ class Component extends DCLogic {
     };
     window.addEventListener('scroll', this.onScroll, { passive: true });
     window.addEventListener('resize', this.onScroll);
-    // React drops the `muted` attribute, so previews would play with sound (and
-    // browsers would block their autoplay). Force it on; only the lightbox has audio.
-    this.refs.forEach(r => { const v = r.current; if (v) { v.muted = true; v.defaultMuted = true; } });
+    // React drops the `muted` and `loop` attributes, so previews would play with sound
+    // (and browsers would block their autoplay) and freeze on their last frame.
+    // Force both on; only the lightbox has audio.
+    this.refs.forEach(r => { const v = r.current; if (v) { v.muted = true; v.defaultMuted = true; v.loop = true; } });
     const hv = this.refs[0].current; if (hv) hv.play().catch(() => {});
     this.refs.forEach((r, i) => {
       const v = r.current, fr = this.seek[i]; if (!v || fr == null) return;
@@ -1059,7 +1060,7 @@ class Component extends DCLogic {
     this.refs.forEach((r, i) => {
       const v = r.current, rg = this.ranges[i]; if (!v || !rg) return;
       const on = S >= rg[0] && S <= rg[1];
-      if (on && v.paused && !this.state.lb) { v.muted = true; v.play().catch(() => {}); }
+      if (on && v.paused && !this.state.lb) { v.muted = true; v.loop = true; v.play().catch(() => {}); }
       else if ((!on || this.state.lb) && !v.paused) v.pause();
     });
   }
