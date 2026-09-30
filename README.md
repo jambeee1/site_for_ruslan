@@ -6,6 +6,7 @@
 
 ```
 wrangler.jsonc          настройки Cloudflare: публикуется папка public/, сборки нет
+worker.js               отдаёт видео по частям (206 Range), без этого не играет Safari
 public/                 всё, что уходит на сервер
   index.html            страница целиком: разметка, стили, логика анимаций
   404.html              страница «не найдено»
@@ -32,7 +33,7 @@ cd public && python3 -m http.server 8000
 
 ## Публикация
 
-Сайт работает на **Cloudflare Workers** и подключён к ветке `main` этого репозитория. Каждое изменение в `main` публикуется автоматически (Deploy command: `npx wrangler deploy`, Build command: пусто). Настройки лежат в `wrangler.jsonc`.
+Сайт работает на **Cloudflare Workers** и подключён к ветке `main` этого репозитория. Каждое изменение в `main` публикуется автоматически (Deploy command: `npx wrangler deploy`, Build command: пусто). Настройки лежат в `wrangler.jsonc`. Статические файлы Cloudflare не умеет отдавать по частям, а Safari без этого не воспроизводит видео. Поэтому запросы к `/assets/video/*` сначала проходят через `worker.js`, который вырезает нужный кусок файла.
 
 ### Домен
 
