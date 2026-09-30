@@ -39,12 +39,14 @@
 <link rel="preload" href="assets/fonts/archivo-100-900-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>
-// Pick one video format per browser: H.264 MP4 where supported (Safari, iOS, Chrome, Edge),
-// VP8 WebM otherwise (Chromium builds without proprietary codecs).
+// Pick one video format per browser: VP9 WebM (about half the size) in Chrome, Edge and
+// Firefox; H.264 MP4 in Safari / iOS, whose VP9 support is patchy.
 (function () {
-  var ext = document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : 'webm';
+  var v = document.createElement('video'), apple = /Apple/.test(navigator.vendor || '');
+  var ext = !apple && v.canPlayType('video/webm; codecs="vp9"') ? 'webm'
+    : v.canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : 'webm';
   var r = {"tile": "assets/img/tile.webp", "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/js/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/js/react-dom.production.min.js"};
-  ["f1", "frog", "grailed", "np", "racks", "rd1a", "rd1b", "showreel"].forEach(function (n) { r[n] = 'assets/video/' + n + '.' + ext; });
+  ["f1", "frog", "grailed", "np", "racks", "rd", "showreel"].forEach(function (n) { r[n] = 'assets/video/' + n + '.' + ext; });
   window.__resources = r;
 })();
 </script>
@@ -889,7 +891,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         </div>
       </sc-if>
       <sc-if value="{{ lbIsLocal }}" hint-placeholder-val="{{ false }}">
-        <video ref="{{ lbRef }}" sc-camel-on-click="{{ stop }}" sc-camel-on-ended="{{ lbEnded }}" src="{{ lbSrc }}" controls="" playsinline="" style="width:{{ lbW }};aspect-ratio:{{ lbAR }};max-height:84vh;border-radius:{{ lbRad }};background:#000;object-fit:contain"></video>
+        <video ref="{{ lbRef }}" sc-camel-on-click="{{ stop }}" src="{{ lbSrc }}" controls="" playsinline="" style="width:{{ lbW }};aspect-ratio:{{ lbAR }};max-height:84vh;border-radius:{{ lbRad }};background:#000;object-fit:contain"></video>
       </sc-if>
     </div>
   </sc-if>
@@ -918,7 +920,7 @@ class Component extends DCLogic {
   lbRef = React.createRef();
   titles = ['SHOWREEL', 'NOOFFICIAL — NIGHT PARKING', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'VERTICAL FORMAT', 'VERTICAL FORMAT', 'VERTICAL FORMAT', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING'];
   refs = Array.from({ length: 17 }, () => React.createRef());
-  srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), 12: ((window.__resources||{}).rd1a||'uploads/lite/rd1a.mp4'), 1: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 13: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 14: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 15: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 16: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.mp4') };
+  srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), 12: ((window.__resources||{}).rd||'uploads/lite/rd.mp4'), 1: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 13: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 14: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 15: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 16: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.mp4') };
   vimeo = { 0: '1230337518', 2: '999807641', 3: '999807641', 4: '999807641', 5: '999807641', 6: '1137592323', 7: '1137592323', 8: '1137592323', 9: '1137592323', 1: '1230662751', 13: '1230662751', 14: '1230662751', 15: '1230662751', 16: '1230662751' };
   vdur = { 2: 35.04, 3: 35.04, 4: 35.04, 5: 35.04, 6: 37.17, 7: 37.17, 8: 37.17, 9: 37.17, 1: 149.25, 13: 149.25, 14: 149.25, 15: 149.25, 16: 149.25 };
   seek = [null, 0, 0, 0, 0, 0, 0, 0.4375, 0.5625, 0.8542, 0, 0, 0, 0.1042, 0.4792, 0.7292, 0.8542];
@@ -1244,7 +1246,7 @@ class Component extends DCLogic {
     const car = this.carVal || 0;
     const slots = [{ x: 0, y: 0, r: 0, w: 31.5, h: 56, ey: 60 }, { x: -24, y: 6, r: -7, w: 24.75, h: 44, ey: 70 }, { x: 24, y: 6, r: 7, w: 24.75, h: 44, ey: 90 }];
     const lp = (a, b, t) => a + (b - a) * t;
-    const fsrc = [((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), ((window.__resources||{}).rd1a||'uploads/lite/rd1a.mp4')];
+    const fsrc = [((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), ((window.__resources||{}).rd||'uploads/lite/rd.mp4')];
     const p4frames = [10, 11, 12].map((n, k) => {
       const sp = ((k + car) % 3 + 3) % 3, i0 = Math.floor(sp) % 3, i1 = (i0 + 1) % 3, u = sp - Math.floor(sp);
       const A = slots[i0], B = slots[i1];
@@ -1302,11 +1304,10 @@ class Component extends DCLogic {
       lbW: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? 'min(100%, calc(84vh * 9 / 16))' : 'min(100%, calc(80vh * 16 / 9))',
       lbAR: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? '9 / 16' : '16 / 9',
       lbRad: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? '18px' : '0px',
-      lbSrc: this.state.lb ? (this.state.lb.i === 12 && this.state.lb.part ? ((window.__resources||{}).rd1b||'uploads/lite/rd1b.mp4') : (this.srcs[this.state.lb.i] || '')) : '',
+      lbSrc: this.state.lb ? (this.srcs[this.state.lb.i] || '') : '',
       lbIsVimeo: !!(this.state.lb && this.vimeo[this.state.lb.i]),
       lbIsLocal: !!(this.state.lb && !this.vimeo[this.state.lb.i]),
       lbEmbed: this.state.lb && this.vimeo[this.state.lb.i] ? `https://player.vimeo.com/video/${this.vimeo[this.state.lb.i]}?autoplay=1&title=0&byline=0&portrait=0&dnt=1#t=${Math.floor((this.seek[this.state.lb.i] || 0) * (this.vdur[this.state.lb.i] || 0))}s` : '',
-      lbEnded: () => { const lb = this.state.lb; if (lb && lb.i === 12 && !lb.part) this.setState({ lb: { i: 12, part: 1 } }); },
       closeLb: () => this.closeLb(),
       stop: ev => ev.stopPropagation(),
       goTop: () => this.go('', 0),

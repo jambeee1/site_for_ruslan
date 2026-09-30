@@ -54,13 +54,20 @@ python3 -m http.server 8000
 
 ### Добавить или заменить видео
 
-Короткие зацикленные превью лежат в `assets/video/`. Для нового ролика нужны оба формата и кадр-превью:
+В `assets/video/` лежат два вида роликов:
+
+- **Превью** (showreel, frog, racks, np): 11–13-секундные фрагменты без звука, 1080p. Полные версии открываются с Vimeo.
+- **Вертикальные** (grailed, f1, rd): ролики целиком, 1080×1920, со звуком. Играют прямо с сайта.
+
+Каждое видео хранится в двух форматах. Сайт отдаёт WebM (VP9, примерно вдвое легче) в Chrome, Edge и Firefox, а MP4 (H.264) — в Safari и на iPhone. Команды для нового превью (`-ss` — начало фрагмента, `-t` — длительность):
 
 ```bash
-ffmpeg -i source.mov -vf scale=960:-2 -r 30 -c:v libx264 -crf 25 -pix_fmt yuv420p -movflags +faststart -an name.mp4
-ffmpeg -i source.mov -vf scale=960:-2 -r 30 -c:v libvpx -b:v 1M -an name.webm
-ffmpeg -ss 1.5 -i name.mp4 -frames:v 1 -c:v libwebp -quality 72 ../img/posters/name.webp
+ffmpeg -ss 5.8 -t 11 -i source.mp4 -an -vf scale=1920:1080 -c:v libx264 -preset slow -crf 24 -maxrate 4M -bufsize 8M -pix_fmt yuv420p -movflags +faststart name.mp4
+ffmpeg -ss 5.8 -t 11 -i source.mp4 -an -vf scale=1920:1080 -c:v libvpx-vp9 -crf 35 -b:v 0 -row-mt 1 name.webm
+ffmpeg -ss 1.5 -i name.mp4 -frames:v 1 -vf "scale='min(1280,iw)':-2" -c:v libwebp -quality 78 ../img/posters/name.webp
 ```
+
+Для вертикального ролика со звуком уберите `-ss`/`-t`/`-an`/`-maxrate`, поставьте `-vf scale=1080:1920` и добавьте звук: `-c:a aac -b:a 160k` для MP4 и `-c:a libopus -b:a 128k` для WebM.
 
 Новое имя нужно добавить в список видео в скрипте `window.__resources` в `<head>`.
 
