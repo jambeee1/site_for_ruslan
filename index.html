@@ -31,14 +31,23 @@
   "jobTitle": "Video Director & Editor",
   "description": "Ruslan Matuliak — video director and editor. Commercial, brand and music video production from idea and script to directing on set and the final edit.",
   "email": "mailto:RuslanTheD1r@outlook.com",
-  "image": "assets/img/about-1.jpg",
+  "image": "assets/img/about-1.webp",
   "sameAs": ["https://www.instagram.com/ruslanthedirector/", "https://www.behance.net/ruslanthedir"]
 }
 </script>
 
 <link rel="preload" href="assets/fonts/archivo-100-900-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-600-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>window.__resources = {"tile": "assets/img/tile.jpg", "showreel": "assets/video/showreel.webm", "np": "assets/video/np.webm", "f1": "assets/video/f1.webm", "rd1b": "assets/video/rd1b.webm", "frog": "assets/video/frog.webm", "racks": "assets/video/racks.webm", "grailed": "assets/video/grailed.webm", "rd1a": "assets/video/rd1a.webm", "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/js/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/js/react-dom.production.min.js"};</script>
+<script>
+// Pick one video format per browser: H.264 MP4 where supported (Safari, iOS, Chrome, Edge),
+// VP8 WebM otherwise (Chromium builds without proprietary codecs).
+(function () {
+  var ext = document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : 'webm';
+  var r = {"tile": "assets/img/tile.webp", "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/js/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/js/react-dom.production.min.js"};
+  ["f1", "frog", "grailed", "np", "racks", "rd1a", "rd1b", "showreel"].forEach(function (n) { r[n] = 'assets/video/' + n + '.' + ext; });
+  window.__resources = r;
+})();
+</script>
 <script src="assets/js/dc-runtime.js"></script>
 <style>x-dc{display:none}</style>
 
@@ -583,7 +592,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   <div data-screen-label="Hero" style="position:absolute;inset:0;visibility:{{ hero.vis }};clip-path:{{ hero.clip }};z-index:{{ hero.z }};overflow:hidden">
     <div style="position:absolute;inset:0;transform:{{ hero.vidTf }}">
-      <video ref="{{ v0 }}" src="assets/video/showreel.webm" autoplay="" muted="" loop="" playsinline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+      <video ref="{{ v0 }}" src="{{ vid.showreel }}" poster="assets/img/posters/showreel.webp" autoplay="" muted="" loop="" playsinline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
     </div>
     <div style="position:absolute;inset:0;background:#000;opacity:{{ hero.dim }}"></div>
     <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(12px,2vh,24px);padding:0 3vw">
@@ -628,7 +637,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <div data-screen-label="01 Frog Invader" style="position:absolute;inset:0;background:#f4f4f1;color:#0f0f0f;visibility:{{ p1.vis }};transform:{{ p1.tf }};filter:{{ p1.fx }};transform-origin:50% 0%;overflow:hidden;font-family:'Manrope',sans-serif">
     <div class="rm-p1-grid" style="position:absolute;inset:0;box-sizing:border-box;padding:clamp(64px,10vh,100px) 2.4vw 2.4vw;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2vw">
       <div sc-camel-on-click="{{ open2 }}" style="position:relative;min-height:0;border-radius:24px;overflow:hidden;background:#0f0f0f;cursor:pointer;clip-path:{{ p1.vclip }}">
-        <video ref="{{ v2 }}" src="assets/video/frog.webm" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p1.vidTf }}"></video>
+        <video ref="{{ v2 }}" src="{{ vid.frog }}" poster="assets/img/posters/frog.webp" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p1.vidTf }}"></video>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.5))"></div>
         <div style="position:absolute;left:20px;right:20px;bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em">
           <span>FROG INVADER — BRAND VIDEO</span>
@@ -648,13 +657,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         </div>
         <div class="rm-p1-stills" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;min-height:0;opacity:{{ p1.e.op }};transform:{{ p1.e.tf }}">
           <div sc-camel-on-click="{{ open3 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
-            <img src="assets/img/frog-invader-1.jpg" alt="Frog Invader — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <img src="assets/img/frog-invader-1.webp" alt="Frog Invader — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">01</span>
           </div><div sc-camel-on-click="{{ open4 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
-            <img src="assets/img/frog-invader-2.jpg" alt="Frog Invader — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <img src="assets/img/frog-invader-2.webp" alt="Frog Invader — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">02</span>
           </div><div sc-camel-on-click="{{ open5 }}" style="position:relative;min-height:0;border-radius:14px;overflow:hidden;background:#dcdcd6;cursor:pointer" style-hover="transform:translateY(-3px)">
-            <img src="assets/img/tile.jpg" alt="Frog Invader — still 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            <img src="assets/img/tile.webp" alt="Frog Invader — still 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <span style="position:absolute;left:8px;bottom:8px;padding:3px 9px;border-radius:999px;background:#f4f4f1;font-size:10px;font-weight:600;letter-spacing:.06em">03</span>
           </div>
         </div>
@@ -691,7 +700,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;background:#050505;min-height:0;opacity:{{ p2.b.op }}">
         <div sc-camel-on-click="{{ open6 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
-          <video ref="{{ v6 }}" src="assets/video/racks.webm" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          <video ref="{{ v6 }}" src="{{ vid.racks }}" poster="assets/img/posters/racks.webp" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
             <span style="background:#050505;padding:2px 6px">CAM_01</span>
@@ -701,7 +710,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
         </div>
         <div sc-camel-on-click="{{ open7 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
-          <img src="assets/img/racks-on-racks-1.jpg" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <img src="assets/img/racks-on-racks-1.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
             <span style="background:#050505;padding:2px 6px">CAM_02</span>
@@ -710,7 +719,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
         </div>
         <div sc-camel-on-click="{{ open8 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
-          <img src="assets/img/racks-on-racks-2.jpg" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <img src="assets/img/racks-on-racks-2.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
             <span style="background:#050505;padding:2px 6px">CAM_03</span>
@@ -719,7 +728,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <span style="position:absolute;right:14px;bottom:12px;font-size:11px;letter-spacing:.06em;color:#050505;background:#d6ff3c;padding:2px 8px">▶ VIEW</span>
         </div>
         <div sc-camel-on-click="{{ open9 }}" style="position:relative;background:#050505;overflow:hidden;cursor:pointer;outline:0 solid #d6ff3c;outline-offset:-3px" style-hover="outline:3px solid #d6ff3c">
-          <img src="assets/img/racks-on-racks-3.jpg" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <img src="assets/img/racks-on-racks-3.webp" alt="Racks On Racks — still" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))"></div>
           <div style="position:absolute;left:14px;right:14px;top:12px;display:flex;justify-content:space-between;gap:10px;font-size:11px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.8)">
             <span style="background:#050505;padding:2px 6px">CAM_04</span>
@@ -751,7 +760,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       </div>
       <div class="rm-p3-main" style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:2vw;min-height:0">
         <div sc-camel-on-click="{{ open1 }}" style="position:relative;min-height:0;overflow:hidden;background:#000;cursor:pointer;clip-path:{{ p3.frame }}">
-          <video ref="{{ v1 }}" src="assets/video/np.webm" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p3.vid }}"></video>
+          <video ref="{{ v1 }}" src="{{ vid.np }}" poster="assets/img/posters/np.webp" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:{{ p3.vid }}"></video>
           <div style="position:absolute;inset:0;box-shadow:inset 0 0 120px rgba(10,11,25,.8)"></div>
           <div style="position:absolute;left:16px;top:14px;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#fff"><span style="width:7px;height:7px;border-radius:50%;background:#8b6cff;opacity:{{ cursor }}"></span>PREVIEW</div>
           <div class="rm-p3-watch" style="position:absolute;right:16px;bottom:14px;display:flex;align-items:center;gap:12px;padding:12px 20px;background:#cfd5ff;color:#0a0b19;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.14em" style-hover="background:#fff">▶ WATCH FULL VIDEO</div>
@@ -763,16 +772,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           </div>
           <div class="rm-p3-stills" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;min-height:0;opacity:{{ p3.c.op }};transform:{{ p3.c.tf }}">
             <div sc-camel-on-click="{{ open13 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
-              <img src="assets/img/night-parking-1.jpg" alt="Night Parking — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+              <img src="assets/img/night-parking-1.webp" alt="Night Parking — still 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">00:15</span>
             </div><div sc-camel-on-click="{{ open14 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
-              <img src="assets/img/night-parking-2.jpg" alt="Night Parking — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+              <img src="assets/img/night-parking-2.webp" alt="Night Parking — still 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">01:11</span>
             </div><div sc-camel-on-click="{{ open15 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
-              <img src="assets/img/night-parking-3.jpg" alt="Night Parking — still 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+              <img src="assets/img/night-parking-3.webp" alt="Night Parking — still 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">01:48</span>
             </div><div sc-camel-on-click="{{ open16 }}" style="position:relative;min-height:0;overflow:hidden;background:#15172e;cursor:pointer;outline:0 solid #8b6cff;outline-offset:-2px" style-hover="outline:2px solid #8b6cff">
-              <img src="assets/img/night-parking-4.jpg" alt="Night Parking — still 4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+              <img src="assets/img/night-parking-4.webp" alt="Night Parking — still 4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               <span style="position:absolute;left:6px;bottom:6px;padding:2px 6px;background:#0a0b19;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#cfd5ff">02:07</span>
             </div>
           </div>
@@ -798,7 +807,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <div class="rm-p4-r" style="position:absolute;right:3vw;bottom:2vh;font-weight:900;font-size:min(6.4vw,11vh);line-height:.85;letter-spacing:-0.05em;white-space:nowrap;transform:{{ p4.r }};opacity:{{ p4.fade }}">VIDEOS</div>
       <sc-for list="{{ p4frames }}" as="fr" hint-placeholder-count="3">
         <div sc-camel-on-click="{{ fr.open }}" style="position:absolute;left:50%;top:50%;width:{{ fr.w }};height:{{ fr.h }};border-radius:{{ fr.rad }};overflow:hidden;background:#8e2410;cursor:pointer;z-index:{{ fr.z }};opacity:{{ fr.op }};transform:{{ fr.tf }};box-shadow:0 24px 60px rgba(60,10,0,.35)">
-          <video ref="{{ fr.ref }}" src="{{ fr.src }}" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          <video ref="{{ fr.ref }}" src="{{ fr.src }}" poster="{{ fr.poster }}" muted="" loop="" playsinline="" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
           <sc-if value="{{ fr.isC }}" hint-placeholder-val="{{ false }}">
             <span style="position:absolute;right:12px;bottom:12px;width:34px;height:34px;border-radius:50%;background:#fff0e3;color:#d23b1d;display:flex;align-items:center;justify-content:center;opacity:{{ p4.fade }}"><svg width="11" height="12" sc-camel-view-box="0 0 11 12" style="display:block;margin-left:2px"><path d="M0 0 L11 6 L0 12 Z" fill="currentColor"></path></svg></span>
           </sc-if>
@@ -822,7 +831,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <div data-screen-label="About" style="position:absolute;inset:0;background:#0e0e0e;color:#efede7;visibility:{{ ab.vis }};transform:{{ ab.tf }};border-radius:{{ ab.rad }};overflow:hidden;font-family:'Archivo',sans-serif">
     <div class="rm-ab-grid" style="position:absolute;inset:0;padding:clamp(76px,11vh,110px) 4vw {{ cv.padB }};display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:5vw">
       <div class="rm-ab-photo" style="position:relative;align-self:start;aspect-ratio:4/5;max-height:78vh;overflow:hidden;background:#1a1a1a;opacity:{{ ab.a.op }};transform:{{ ab.a.tf }}">
-        <img src="assets/img/about-1.jpg" alt="Ruslan Matuliak" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%">
+        <img src="assets/img/about-1.webp" alt="Ruslan Matuliak" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%">
       </div>
       <div style="display:flex;flex-direction:column;justify-content:space-between;gap:4vh;min-height:0">
         <div style="display:flex;flex-direction:column;gap:3.5vh">
@@ -904,7 +913,7 @@ class Component extends DCLogic {
   lbRef = React.createRef();
   titles = ['SHOWREEL', 'NOOFFICIAL — NIGHT PARKING', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'VERTICAL FORMAT', 'VERTICAL FORMAT', 'VERTICAL FORMAT', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING'];
   refs = Array.from({ length: 17 }, () => React.createRef());
-  srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.webm'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.webm'), 12: ((window.__resources||{}).rd1a||'uploads/lite/rd1a.webm'), 1: ((window.__resources||{}).np||'uploads/lite/np.webm'), 13: ((window.__resources||{}).np||'uploads/lite/np.webm'), 14: ((window.__resources||{}).np||'uploads/lite/np.webm'), 15: ((window.__resources||{}).np||'uploads/lite/np.webm'), 16: ((window.__resources||{}).np||'uploads/lite/np.webm'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.webm'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.webm'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.webm'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.webm'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.webm'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.webm'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.webm'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.webm') };
+  srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), 12: ((window.__resources||{}).rd1a||'uploads/lite/rd1a.mp4'), 1: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 13: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 14: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 15: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 16: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.mp4') };
   vimeo = { 0: '1230337518', 2: '999807641', 3: '999807641', 4: '999807641', 5: '999807641', 6: '1137592323', 7: '1137592323', 8: '1137592323', 9: '1137592323', 1: '1230662751', 13: '1230662751', 14: '1230662751', 15: '1230662751', 16: '1230662751' };
   vdur = { 2: 35.04, 3: 35.04, 4: 35.04, 5: 35.04, 6: 37.17, 7: 37.17, 8: 37.17, 9: 37.17, 1: 149.25, 13: 149.25, 14: 149.25, 15: 149.25, 16: 149.25 };
   seek = [null, 0, 0, 0, 0, 0, 0, 0.4375, 0.5625, 0.8542, 0, 0, 0, 0.1042, 0.4792, 0.7292, 0.8542];
@@ -1208,7 +1217,7 @@ class Component extends DCLogic {
     const car = this.carVal || 0;
     const slots = [{ x: 0, y: 0, r: 0, w: 31.5, h: 56, ey: 60 }, { x: -24, y: 6, r: -7, w: 24.75, h: 44, ey: 70 }, { x: 24, y: 6, r: 7, w: 24.75, h: 44, ey: 90 }];
     const lp = (a, b, t) => a + (b - a) * t;
-    const fsrc = [((window.__resources||{}).grailed||'uploads/lite/grailed.webm'), ((window.__resources||{}).f1||'uploads/lite/f1.webm'), ((window.__resources||{}).rd1a||'uploads/lite/rd1a.webm')];
+    const fsrc = [((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), ((window.__resources||{}).rd1a||'uploads/lite/rd1a.mp4')];
     const p4frames = [10, 11, 12].map((n, k) => {
       const sp = ((k + car) % 3 + 3) % 3, i0 = Math.floor(sp) % 3, i1 = (i0 + 1) % 3, u = sp - Math.floor(sp);
       const A = slots[i0], B = slots[i1];
@@ -1226,7 +1235,7 @@ class Component extends DCLogic {
       const W = `${f(w)}vh`, H = `${f(hh)}vh`, rad = 16;
       if (t5 > 0) { if (isC) y += 40 * t5; else x += Math.sign(x || 1) * 30 * t5; }
       const op = 1 - t5;
-      return { ref: this.refs[n], isC, open: () => isC ? this.openLb(n) : this.shiftCar(slot === 1 ? -1 : 1), src: fsrc[k], w: W, h: H, z, op: f(op), rad: `${rad}px`,
+      return { ref: this.refs[n], isC, open: () => isC ? this.openLb(n) : this.shiftCar(slot === 1 ? -1 : 1), src: fsrc[k], poster: fsrc[k].replace(/^.*\/(\w+)\.mp4$/, 'assets/img/posters/$1.webp'), w: W, h: H, z, op: f(op), rad: `${rad}px`,
         tf: `translate(-50%, -50%) translate(${f(x)}vh, ${f(y)}vh) rotate(${f(rr)}deg)` };
     });
     ['b', 'c', 'd'].forEach(k => { p4[k].op = f(+p4[k].op * (1 - t5)); });
@@ -1247,6 +1256,7 @@ class Component extends DCLogic {
     const o = { tiles, tilesVis: vis(tilesOn), knock, peel, flash: f(flash), flashVis: vis(flash > 0.001), p4frames, cr, cv, letters, words, hero, blobs, gooVis: vis(gooOn), p1, p2, p3, bars, barsVis: vis(glitching), ap, tc, p4, ab };
     this.refs.forEach((ref, i) => { o['v' + i] = ref; o['open' + i] = () => this.openLb(i); });
     return Object.assign(o, {
+      vid: window.__resources || {},
       cursor: Math.floor(S * 12) % 2 ? 1 : 0,
       heroIntroOp: intro ? 1 : 0,
       showHud: this.props.showHud ?? true,
@@ -1265,7 +1275,7 @@ class Component extends DCLogic {
       lbW: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? 'min(100%, calc(84vh * 9 / 16))' : 'min(100%, calc(80vh * 16 / 9))',
       lbAR: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? '9 / 16' : '16 / 9',
       lbRad: this.state.lb && this.state.lb.i >= 10 && this.state.lb.i <= 12 ? '18px' : '0px',
-      lbSrc: this.state.lb ? (this.state.lb.i === 12 && this.state.lb.part ? ((window.__resources||{}).rd1b||'uploads/lite/rd1b.webm') : (this.srcs[this.state.lb.i] || '')) : '',
+      lbSrc: this.state.lb ? (this.state.lb.i === 12 && this.state.lb.part ? ((window.__resources||{}).rd1b||'uploads/lite/rd1b.mp4') : (this.srcs[this.state.lb.i] || '')) : '',
       lbIsVimeo: !!(this.state.lb && this.vimeo[this.state.lb.i]),
       lbIsLocal: !!(this.state.lb && !this.vimeo[this.state.lb.i]),
       lbEmbed: this.state.lb && this.vimeo[this.state.lb.i] ? `https://player.vimeo.com/video/${this.vimeo[this.state.lb.i]}?autoplay=1&title=0&byline=0&portrait=0&dnt=1#t=${Math.floor((this.seek[this.state.lb.i] || 0) * (this.vdur[this.state.lb.i] || 0))}s` : '',
