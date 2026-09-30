@@ -32,7 +32,7 @@
   "description": "Ruslan Matuliak — video director and editor. Commercial, brand and music video production from idea and script to directing on set and the final edit.",
   "email": "mailto:RuslanTheD1r@outlook.com",
   "image": "assets/img/about-1.webp",
-  "sameAs": ["https://www.instagram.com/ruslanthedirector/", "https://www.behance.net/ruslanthedir"]
+  "sameAs": ["https://www.instagram.com/ruslanthedirector/", "https://vimeo.com/ruslanthedir"]
 }
 </script>
 
@@ -74,11 +74,13 @@
       <li><a href="https://vimeo.com/999807641" style="color:#d6ff3c">Frog Invader — brand video</a></li>
       <li><a href="https://vimeo.com/1137592323" style="color:#d6ff3c">Prodbyrl — Racks On Racks (music video)</a></li>
       <li><a href="https://vimeo.com/1230662751" style="color:#d6ff3c">Noofficial — Night Parking (music video)</a></li>
+      <li><a href="https://vimeo.com/1231687535" style="color:#d6ff3c">Fashion stylist — social media video (9:16)</a></li>
+      <li><a href="https://vimeo.com/1231684880" style="color:#d6ff3c">Zmrok Tattoo Studio (9:16)</a></li>
       <li><a href="https://vimeo.com/1230337518" style="color:#d6ff3c">Showreel</a></li>
     </ul>
     <p style="margin-top:32px"><a href="mailto:RuslanTheD1r@outlook.com" style="color:#d6ff3c">RuslanTheD1r@outlook.com</a> ·
       <a href="https://www.instagram.com/ruslanthedirector/" style="color:#d6ff3c">Instagram</a> ·
-      <a href="https://www.behance.net/ruslanthedir" style="color:#d6ff3c">Behance</a></p>
+      <a href="https://vimeo.com/ruslanthedir" style="color:#d6ff3c">Vimeo</a></p>
   </main>
 </noscript>
 <x-dc>
@@ -861,7 +863,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
               </a>
             </sc-if></div>
           <div style="display:flex;gap:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em">
-            <a href="https://www.instagram.com/ruslanthedirector/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://www.behance.net/ruslanthedir" target="_blank" rel="noopener">BEHANCE</a>
+            <a href="https://www.instagram.com/ruslanthedirector/" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://vimeo.com/ruslanthedir" target="_blank" rel="noopener">VIMEO</a>
             <button sc-camel-on-click="{{ goTop }}" style="letter-spacing:.12em">BACK TO TOP ↑</button>
           </div>
         </div>
@@ -891,7 +893,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         </div>
       </div>
       <sc-if value="{{ lbIsVimeo }}" hint-placeholder-val="{{ false }}">
-        <div sc-camel-on-click="{{ stop }}" style="position:relative;width:{{ lbW }};aspect-ratio:16 / 9;max-height:84vh;background:#000">
+        <div sc-camel-on-click="{{ stop }}" style="position:relative;width:{{ lbW }};aspect-ratio:{{ lbAR }};max-height:84vh;border-radius:{{ lbRad }};overflow:hidden;background:#000">
           <iframe src="{{ lbEmbed }}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
         </div>
       </sc-if>
@@ -923,10 +925,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 class Component extends DCLogic {
   state = { S: 0, vw: 1440, vh: 900, intro: false, introDone: false, lb: null, car: 0, tick: 0, wf: [0, 0, 0, 0, 0, 0] };
   lbRef = React.createRef();
-  titles = ['SHOWREEL', 'NOOFFICIAL — NIGHT PARKING', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'VERTICAL FORMAT', 'VERTICAL FORMAT', 'VERTICAL FORMAT', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING'];
+  titles = ['SHOWREEL', 'NOOFFICIAL — NIGHT PARKING', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'GRAILED', 'FASHION STYLIST — SOCIAL MEDIA', 'ZMROK TATTOO STUDIO', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING'];
   refs = Array.from({ length: 17 }, () => React.createRef());
   srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), 12: ((window.__resources||{}).rd||'uploads/lite/rd.mp4'), 1: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 13: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 14: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 15: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 16: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.mp4') };
-  vimeo = { 0: '1230337518', 2: '999807641', 3: '999807641', 4: '999807641', 5: '999807641', 6: '1137592323', 7: '1137592323', 8: '1137592323', 9: '1137592323', 1: '1230662751', 13: '1230662751', 14: '1230662751', 15: '1230662751', 16: '1230662751' };
+  vimeo = { 11: '1231687535', 12: '1231684880', 0: '1230337518', 2: '999807641', 3: '999807641', 4: '999807641', 5: '999807641', 6: '1137592323', 7: '1137592323', 8: '1137592323', 9: '1137592323', 1: '1230662751', 13: '1230662751', 14: '1230662751', 15: '1230662751', 16: '1230662751' };
   vdur = { 2: 35.04, 3: 35.04, 4: 35.04, 5: 35.04, 6: 37.17, 7: 37.17, 8: 37.17, 9: 37.17, 1: 149.25, 13: 149.25, 14: 149.25, 15: 149.25, 16: 149.25 };
   seek = [null, 0, 0, 0, 0, 0, 0, 0.4375, 0.5625, 0.8542, 0, 0, 0, 0.1042, 0.4792, 0.7292, 0.8542];
   ranges = [[-1, 3.1], [8.3, 11], [2.1, 5.9], null, null, null, [4.9, 8.6], null, null, null, [9.8, 14.2], [9.8, 14.2], [9.8, 14.2]];
