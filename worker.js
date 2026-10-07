@@ -1,9 +1,21 @@
-// Serves the static site from ./public. Workers static assets ignore HTTP Range
+// Serves the static site from ./public.
+// 1. Redirects www to the bare domain.
+// 2. Workers static assets ignore HTTP Range
 // requests (always 200 + the whole file), but Safari/iOS will only play <video>
 // from a server that answers byte ranges with 206. Video requests are routed
 // here first (see run_worker_first in wrangler.jsonc) and sliced to the range.
 export default {
   async fetch(request, env) {
+    // One canonical host: www.ruslanthedirector.online -> ruslanthedirector.online (301).
+    // Only page requests reach the Worker (run_worker_first in wrangler.jsonc), which
+    // is all search engines need; assets on www still load directly.
+    const url = new URL(request.url);
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
+    if (!url.pathname.startsWith('/assets/video/')) return env.ASSETS.fetch(request);
+
     const res = await env.ASSETS.fetch(request);
     if (res.status !== 200) return res;
 

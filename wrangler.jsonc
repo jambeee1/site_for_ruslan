@@ -1,5 +1,6 @@
 // Cloudflare Workers config: the site is the static folder ./public, no build step.
-// worker.js only handles video requests (to answer byte ranges for Safari);
+// worker.js handles page requests (www -> bare-domain redirect) and video requests
+// (byte ranges for Safari);
 // everything else is served straight from the static assets.
 {
   "name": "ruslanthedirector",
@@ -9,6 +10,6 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/assets/video/*"]
+    "run_worker_first": ["/", "/index.html", "/sitemap.xml", "/robots.txt", "/assets/video/*"]
   }
 }

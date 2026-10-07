@@ -49,7 +49,16 @@
   var ext = !apple && v.canPlayType('video/webm; codecs="vp9"') ? 'webm'
     : v.canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : 'webm';
   var r = {"tile": "assets/img/tile.webp", "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/js/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/js/react-dom.production.min.js"};
-  ["f1", "frog", "grailed", "np", "racks", "rd", "showreel"].forEach(function (n) { r[n] = 'assets/video/' + n + '.' + ext; });
+  var files = {
+    f1: ['assets/video/f1.mp4', 'assets/video/f1.webm'],
+    frog: ['assets/video/frog.mp4', 'assets/video/frog.webm'],
+    grailed: ['assets/video/grailed.mp4', 'assets/video/grailed.webm'],
+    np: ['assets/video/np.mp4', 'assets/video/np.webm'],
+    racks: ['assets/video/racks.mp4', 'assets/video/racks.webm'],
+    rd: ['assets/video/rd.mp4', 'assets/video/rd.webm'],
+    showreel: ['assets/video/showreel.mp4', 'assets/video/showreel.webm']
+  };
+  for (var n in files) r[n] = files[n][ext === 'mp4' ? 0 : 1];
   window.__resources = r;
 })();
 </script>
@@ -933,7 +942,8 @@ class Component extends DCLogic {
   lbRef = React.createRef();
   titles = ['SHOWREEL', 'NOOFFICIAL — NIGHT PARKING', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'FROG INVADER — BRAND VIDEO', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', 'PRODBYRL — RACKS ON RACKS (MUSIC VIDEO)', '1NONLY, FREDDIE DREDD — GRAILED', 'FASHION STYLIST — SOCIAL MEDIA', 'ZMROK TATTOO STUDIO', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING', 'NOOFFICIAL — NIGHT PARKING'];
   refs = Array.from({ length: 17 }, () => React.createRef());
-  srcs = { 10: ((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), 11: ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), 12: ((window.__resources||{}).rd||'uploads/lite/rd.mp4'), 1: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 13: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 14: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 15: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 16: ((window.__resources||{}).np||'uploads/lite/np.mp4'), 2: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 3: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 4: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 5: ((window.__resources||{}).frog||'uploads/lite/frog.mp4'), 6: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 7: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 8: ((window.__resources||{}).racks||'uploads/lite/racks.mp4'), 9: ((window.__resources||{}).racks||'uploads/lite/racks.mp4') };
+  posters = ['assets/img/posters/grailed.webp', 'assets/img/posters/f1.webp', 'assets/img/posters/rd.webp'];
+  srcs = { 10: (window.__resources||{}).grailed, 11: (window.__resources||{}).f1, 12: (window.__resources||{}).rd, 1: (window.__resources||{}).np, 13: (window.__resources||{}).np, 14: (window.__resources||{}).np, 15: (window.__resources||{}).np, 16: (window.__resources||{}).np, 2: (window.__resources||{}).frog, 3: (window.__resources||{}).frog, 4: (window.__resources||{}).frog, 5: (window.__resources||{}).frog, 6: (window.__resources||{}).racks, 7: (window.__resources||{}).racks, 8: (window.__resources||{}).racks, 9: (window.__resources||{}).racks };
   vimeo = { 0: '1230337518', 1: '1230662751', 2: '1231701201', 3: '1231701201', 4: '1231701201', 5: '1231701201', 6: '1137592323', 7: '1137592323', 8: '1137592323', 9: '1137592323', 10: '1157992667', 11: '1231687535', 12: '1231684880', 13: '1230662751', 14: '1230662751', 15: '1230662751', 16: '1230662751' };
   // Second of the Vimeo film each still/card opens at (the still is that frame of the film)
   at = { 4: 25, 5: 32, 7: 16, 8: 20, 9: 31, 13: 15, 14: 71, 15: 108, 16: 110 };
@@ -1191,7 +1201,7 @@ class Component extends DCLogic {
       const y = (1 - tin) * 100 * dir + tout * 100 * -dir;
       tiles.push({
         l: `${f(i * 100 / NS)}%`, t: '0%', w: `${f(100 / NS + 0.08)}%`, h: '100%',
-        op: '1', bg: '#0f0f0f', img: `url(${(window.__resources||{}).tile||'uploads/lite/p2-still-3.jpg'})`,
+        op: '1', bg: '#0f0f0f', img: `url(${(window.__resources||{}).tile})`,
         tf: `translateY(${f(y)}%)`,
         bpos: `${f(-(i * vw / NS) - (coverW - vw) / 2)}px ${f(-(coverH - vh) / 2)}px`, bsize: `${f(coverW)}px ${f(coverH)}px`,
       });
@@ -1300,7 +1310,7 @@ class Component extends DCLogic {
     const car = this.carVal || 0;
     const slots = [{ x: 0, y: 0, r: 0, w: 31.5, h: 56, ey: 60 }, { x: -24, y: 6, r: -7, w: 24.75, h: 44, ey: 70 }, { x: 24, y: 6, r: 7, w: 24.75, h: 44, ey: 90 }];
     const lp = (a, b, t) => a + (b - a) * t;
-    const fsrc = [((window.__resources||{}).grailed||'uploads/lite/grailed.mp4'), ((window.__resources||{}).f1||'uploads/lite/f1.mp4'), ((window.__resources||{}).rd||'uploads/lite/rd.mp4')];
+    const fsrc = [(window.__resources||{}).grailed, (window.__resources||{}).f1, (window.__resources||{}).rd];
     const p4frames = [10, 11, 12].map((n, k) => {
       const sp = ((k + car) % 3 + 3) % 3, i0 = Math.floor(sp) % 3, i1 = (i0 + 1) % 3, u = sp - Math.floor(sp);
       const A = slots[i0], B = slots[i1];
@@ -1318,7 +1328,7 @@ class Component extends DCLogic {
       const W = `${f(w)}vh`, H = `${f(hh)}vh`, rad = 16;
       if (t5 > 0) { if (isC) y += 40 * t5; else x += Math.sign(x || 1) * 30 * t5; }
       const op = 1 - t5;
-      return { ref: this.refs[n], isC, open: () => isC ? this.openLb(n) : this.shiftCar(slot === 1 ? -1 : 1), src: fsrc[k], poster: fsrc[k].replace(/^.*\/(\w+)\.(mp4|webm)$/, 'assets/img/posters/$1.webp'), w: W, h: H, z, op: f(op), rad: `${rad}px`,
+      return { ref: this.refs[n], isC, open: () => isC ? this.openLb(n) : this.shiftCar(slot === 1 ? -1 : 1), src: fsrc[k], poster: this.posters[k], w: W, h: H, z, op: f(op), rad: `${rad}px`,
         tf: `translate(-50%, -50%) translate(${f(x)}vh, ${f(y)}vh) rotate(${f(rr)}deg)` };
     });
     ['b', 'c', 'd'].forEach(k => { p4[k].op = f(+p4[k].op * (1 - t5)); });
