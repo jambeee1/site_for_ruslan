@@ -902,7 +902,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         <span>{{ lbTitle }}</span>
         <div style="display:flex;align-items:center;gap:20px;flex-shrink:0">
           <sc-if value="{{ lbIsVimeo }}" hint-placeholder-val="{{ false }}">
-            <a href="{{ lbVimeoUrl }}" target="_blank" rel="noopener" sc-camel-on-click="{{ stop }}" style="letter-spacing:.14em;color:#d6ff3c;white-space:nowrap">VIMEO ↗</a>
+            <a sc-camel-href="{{ lbVimeoUrl }}" target="_blank" rel="noopener" sc-camel-on-click="{{ stop }}" style="letter-spacing:.14em;color:#d6ff3c;white-space:nowrap">VIMEO ↗</a>
           </sc-if>
           <button sc-camel-on-click="{{ closeLb }}" style="letter-spacing:.14em;white-space:nowrap">CLOSE ✕</button>
         </div>
