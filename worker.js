@@ -1,18 +1,24 @@
 // Serves the static site from ./public.
-// 1. Redirects www to the bare domain.
+// 1. One canonical URL: http -> https, www -> bare domain, /index.html -> / (301).
 // 2. Workers static assets ignore HTTP Range
 // requests (always 200 + the whole file), but Safari/iOS will only play <video>
 // from a server that answers byte ranges with 206. Video requests are routed
 // here first (see run_worker_first in wrangler.jsonc) and sliced to the range.
 export default {
   async fetch(request, env) {
-    // One canonical host: www.ruslanthedirector.online -> ruslanthedirector.online (301).
+    // One canonical URL for search engines: https://ruslanthedirector.online/ (301, one hop).
     // Only page requests reach the Worker (run_worker_first in wrangler.jsonc), which
     // is all search engines need; assets on www still load directly.
     const url = new URL(request.url);
-    if (url.hostname.startsWith('www.')) {
-      url.hostname = url.hostname.slice(4);
-      return Response.redirect(url.toString(), 301);
+    const isLocal = url.hostname === 'localhost' || url.hostname === '127.0.0.1';
+    const wantHttps = url.protocol === 'http:' && !isLocal;
+    const isWww = url.hostname.startsWith('www.');
+    const isIndex = url.pathname === '/index.html' || url.pathname === '/index';
+    if (wantHttps || isWww || isIndex) {
+      if (wantHttps) url.protocol = 'https:';
+      if (isWww) url.hostname = url.hostname.slice(4);
+      if (isIndex) url.pathname = '/';
+      return Response.redirect(url.toString(), 301);   // one hop to https://ruslanthedirector.online/...
     }
     if (!url.pathname.startsWith('/assets/video/')) return env.ASSETS.fetch(request);
 

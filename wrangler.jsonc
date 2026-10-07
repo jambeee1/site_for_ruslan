@@ -10,6 +10,6 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/", "/index.html", "/sitemap.xml", "/robots.txt", "/assets/video/*"]
+    "run_worker_first": ["/", "/index.html", "/index", "/sitemap.xml", "/robots.txt", "/assets/video/*"]
   }
 }
