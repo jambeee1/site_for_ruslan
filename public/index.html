@@ -96,7 +96,10 @@
       <a href="https://vimeo.com/ruslanthedir" style="color:#d6ff3c">Vimeo</a></p>
   </main>
 </noscript>
-<x-dc>
+<!-- The Claude Design template stays inert text here (not parsed, fetched, indexed
+     or read aloud); it is moved into <x-dc> just before the runtime boots. Visitors
+     without JavaScript get the <noscript> page above. -->
+<script type="text/x-dc-template" id="dc-template">
 <helmet>
 <style>
 /* latin-ext */
@@ -935,7 +938,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 </div>
 
 <div style="height:{{ trackH }}"></div>
-</x-dc>
+</script>
+<script>(function () { var t = document.getElementById('dc-template'), x = document.createElement('x-dc'); x.innerHTML = t.textContent; t.replaceWith(x); })();</script>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;pace&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.6,&quot;max&quot;:1.8,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll&quot;},&quot;intensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.3,&quot;max&quot;:1.6,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Transitions&quot;},&quot;videoDim&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.35,&quot;min&quot;:0,&quot;max&quot;:0.8,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;showHud&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Chrome&quot;},&quot;creditStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pill&quot;,&quot;marquee&quot;,&quot;stamp&quot;,&quot;credits&quot;],&quot;default&quot;:&quot;marquee&quot;,&quot;tsType&quot;:&quot;'pill'|'marquee'|'stamp'|'credits'&quot;,&quot;section&quot;:&quot;Credit&quot;}}">
 class Component extends DCLogic {
   state = { S: 0, vw: 1440, vh: 900, intro: false, introDone: false, lb: null, car: 0, tick: 0, wf: [0, 0, 0, 0, 0, 0] };
