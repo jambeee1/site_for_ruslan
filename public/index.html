@@ -655,7 +655,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         <stop offset="1" stop-color="#c9c7c0"></stop>
       </linearGradient>
     </defs>
-    <polygon points="{{ peel.pts }}" fill="url(#rm-peel)"></polygon>
+    <polygon sc-camel-points="{{ peel.pts }}" fill="url(#rm-peel)"></polygon>
   </svg>
 
   
@@ -850,8 +850,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   <!-- aperture blades outline -->
   <svg sc-camel-view-box="{{ ap.vb }}" sc-camel-preserve-aspect-ratio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;visibility:{{ ap.vis }}">
-    <polygon points="{{ ap.pts2 }}" fill="none" stroke="#d23b1d" stroke-width="10"></polygon>
-    <polygon points="{{ ap.pts }}" fill="none" stroke="#d6ff3c" stroke-width="2"></polygon>
+    <polygon sc-camel-points="{{ ap.pts2 }}" fill="none" stroke="#d23b1d" stroke-width="10"></polygon>
+    <polygon sc-camel-points="{{ ap.pts }}" fill="none" stroke="#d6ff3c" stroke-width="2"></polygon>
   </svg>
 
   <!-- ABOUT (SHIFT 5 · frame → sheet) -->
@@ -924,7 +924,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <sc-if value="{{ showHud }}" hint-placeholder-val="{{ true }}">
     <div class="rm-hud" style="position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4vw;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;mix-blend-mode:difference;z-index:10">
       <button sc-camel-on-click="{{ goTop }}" style="letter-spacing:.14em;font-weight:600;opacity:{{ hudNameOp }}">RUSLAN MATULIAK</button>
-      <span>{{ class="rm-hud-label" hudLabel }}</span>
+      <span class="rm-hud-label">{{ hudLabel }}</span>
       <div style="display:flex;gap:28px">
         <button sc-camel-on-click="{{ goWork }}" style="letter-spacing:.14em">WORK</button>
         <button class="rm-hud-about" sc-camel-on-click="{{ goAbout }}" style="letter-spacing:.14em">ABOUT</button>
